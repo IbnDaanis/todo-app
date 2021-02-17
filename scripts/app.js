@@ -14,6 +14,7 @@ class TodoList {
 
   addTodo = todo => {
     this.#list[todo.id] = todo
+    DOM_EVENTS.addTodosToDOM(this.getList())
     return this
   }
 
@@ -29,9 +30,9 @@ class TodoList {
 }
 
 class Todo {
-  constructor(title, isCompleted) {
+  constructor(title) {
     this.title = title
-    this.isCompleted = isCompleted
+    this.isCompleted = false
     this.id = Math.random().toString(36).substr(2, 9)
   }
 }
@@ -41,7 +42,6 @@ const DOM_EVENTS = (() => {
   const todoContainer = document.querySelector('#todoContainer')
 
   const addTodosToDOM = todos => {
-    console.log({ todos })
     todoContainer.innerHTML = ''
     todos.forEach(todo => {
       const element = document.createElement('p')
@@ -50,15 +50,19 @@ const DOM_EVENTS = (() => {
     })
   }
 
-  const addTodoToDOM = event => {
-    event.preventDefault()
+  const addTodoFormSubmit = () => {
+    const newTodo = new Todo(addTodoForm['addTodo'].value)
+
     console.log(addTodoForm['addTodo'].value)
+    addTodoForm.reset()
+
+    return newTodo
   }
 
-  addTodoForm.onsubmit = event => addTodoToDOM(event)
-
   return {
+    addTodoForm,
     addTodosToDOM,
+    addTodoFormSubmit,
   }
 })()
 
@@ -67,6 +71,12 @@ const newTodoList = new TodoList()
 for (let i = 0; i < 10; i++) {
   newTodoList.addTodo(new Todo(i, false))
 }
+
 DOM_EVENTS.addTodosToDOM(newTodoList.getList())
+
+DOM_EVENTS.addTodoForm.onsubmit = event => {
+  event.preventDefault()
+  newTodoList.addTodo(DOM_EVENTS.addTodoFormSubmit())
+}
 
 console.log(newTodoList.getList())
