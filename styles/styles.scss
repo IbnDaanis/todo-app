@@ -81,9 +81,11 @@ main {
     form {
       margin-bottom: 1rem;
       display: flex;
+
       input {
         flex: 1;
       }
+
       button {
         margin-left: 1rem;
         color: white;
@@ -95,6 +97,7 @@ main {
         font-size: 1rem;
         font-weight: 500;
         transition: 0.2s ease-in-out;
+
         &:hover {
           filter: brightness(1.1);
         }
@@ -112,8 +115,10 @@ main {
     h2 {
       text-align: center;
     }
+
     ul {
       list-style: none;
+
       .todo {
         width: 100%;
         display: flex;
@@ -121,11 +126,14 @@ main {
         align-items: center;
         padding: 0.5rem 1rem;
         transition: 0.2s ease-in-out;
+
         &:hover {
           background: rgb(238, 238, 238);
         }
+
         &.completed {
           opacity: 0.5;
+
           label {
             text-decoration: line-through;
           }
@@ -136,6 +144,7 @@ main {
           width: 100%;
           cursor: pointer;
         }
+
         button {
           margin-left: 1rem;
           background: rgb(235, 30, 30);
@@ -147,6 +156,7 @@ main {
           font-size: 1rem;
           font-weight: 500;
           transition: 0.2s ease-in-out;
+
           &:hover {
             filter: brightness(1.1);
           }
@@ -162,6 +172,7 @@ main {
           -moz-user-select: none;
           -ms-user-select: none;
           user-select: none;
+
           input {
             position: absolute;
             opacity: 0;
@@ -169,6 +180,7 @@ main {
             height: 0;
             width: 0;
           }
+
           &:hover input ~ .checkmark {
             background-color: #ccc;
           }
@@ -198,6 +210,7 @@ main {
             }
           }
         }
+
         .container input:checked ~ .checkmark {
           background-color: #2196f3;
         }

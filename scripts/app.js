@@ -63,7 +63,6 @@ const DOM_EVENTS = (() => {
 
   const _todoElement = todo => {
     const element = _stringToHTML(
-      // <input type="checkbox" id="isComplete${todo.id}" name="isComplete"/>
       `<li class='todo ${todo.isCompleted ? 'completed' : ''}'>
         <label for="isComplete${todo.id}" class='container'>${todo.title}
         <input type="checkbox" id="isComplete${todo.id}" name="isComplete" ${
@@ -105,10 +104,6 @@ const DOM_EVENTS = (() => {
     return new Todo(addTodoForm['addTodo'].value)
   }
 
-  // for (let i = 0; i < 100; i++) {
-  //   list.addTodo(new Todo(`This is Todo #${i}`, false))
-  // }
-
   addTodoForm.onsubmit = event => {
     event.preventDefault()
     list.addTodo(addTodoFormSubmit())
@@ -119,10 +114,9 @@ const DOM_EVENTS = (() => {
   searchTodos.oninput = ({ target }) => {
     addTodosToDOM(list.filterList(target.value))
   }
+
   return {
-    addTodoForm,
     addTodosToDOM,
-    addTodoFormSubmit,
   }
 })()
 
