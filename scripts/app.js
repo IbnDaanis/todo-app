@@ -13,7 +13,9 @@ class TodoList {
   }
 
   filterList = query => {
-    return this.getList().filter(item => item.title === query)
+    return this.getList().filter(item =>
+      item.title.toLowerCase().includes(query.trim().toLowerCase())
+    )
   }
 
   addTodo = todo => {
@@ -47,6 +49,7 @@ const DOM_EVENTS = (() => {
   const list = new TodoList()
   const addTodoForm = document.querySelector('#addTodoForm')
   const todoContainer = document.querySelector('#todoContainer')
+  const searchTodos = document.querySelector('#search')
 
   const _stringToHTML = (str, elementType) => {
     const fragment = elementType
@@ -63,7 +66,7 @@ const DOM_EVENTS = (() => {
       `<div class='todo ${todo.isCompleted ? 'completed' : ''}'>
         <input type="checkbox" id="isComplete${todo.id}" name="isComplete"/>
         <label for="isComplete${todo.id}">${todo.title}</label>
-        <button id='deleteButton'>Delete Todo</button>
+        <button id='deleteButton${todo.id}'>Delete Todo</button>
        </div>`,
       'li'
     )
@@ -74,7 +77,7 @@ const DOM_EVENTS = (() => {
       addTodosToDOM()
     }
 
-    element.querySelector('#deleteButton').onclick = () => {
+    element.querySelector(`#deleteButton${todo.id}`).onclick = () => {
       list.removeTodo(todo.id)
       addTodosToDOM()
     }
@@ -82,9 +85,9 @@ const DOM_EVENTS = (() => {
     return element
   }
 
-  const addTodosToDOM = () => {
+  const addTodosToDOM = (todos = list.getList()) => {
     todoContainer.innerHTML = ''
-    list.getList().forEach(todo => {
+    todos.forEach(todo => {
       todoContainer.appendChild(_todoElement(todo))
     })
   }
@@ -93,6 +96,10 @@ const DOM_EVENTS = (() => {
     return new Todo(addTodoForm['addTodo'].value)
   }
 
+  // for (let i = 0; i < 500; i++) {
+  //   list.addTodo(new Todo(`This is Todo #${i}`, false))
+  // }
+
   addTodoForm.onsubmit = event => {
     event.preventDefault()
     list.addTodo(addTodoFormSubmit())
@@ -100,6 +107,9 @@ const DOM_EVENTS = (() => {
     addTodoForm.reset()
   }
 
+  searchTodos.oninput = ({ target }) => {
+    addTodosToDOM(list.filterList(target.value))
+  }
   return {
     addTodoForm,
     addTodosToDOM,
