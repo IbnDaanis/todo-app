@@ -5,12 +5,24 @@ class TodoList {
   }
 
   getList = () => this.#list
-  addTodo = () => {
-    this.list.push('Hello')
+  addTodo = todo => {
+    this.list.push(todo)
+    return this
+  }
+  removeTodo = todo => {
+    return this
+  }
+  editTodo = todo => {
     return this
   }
 }
 
-const newTodo = new TodoList()
+class Todo {
+  constructor(title, isCompleted) {
+    this.title = title
+    this.isCompleted = isCompleted
+    this.isDeleted = false
+  }
+}
 
-console.log(newTodo.getList())
+const newTodo = new TodoList()
