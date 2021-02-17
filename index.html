@@ -9,24 +9,31 @@
     <title>Todo App</title>
   </head>
   <body>
-    <h1>Todo App</h1>
-    <div class="add-todo-form">
-      <form id="addTodoForm">
+    <main>
+      <h1>Todo App</h1>
+      <div class="add-todo-form">
+        <form id="addTodoForm">
+          <input
+            type="text"
+            placeholder="Add Todo"
+            name="addTodo"
+            id="addTodo"
+            title="Add Todo"
+          />
+          <button type="submit">Add Todo</button>
+        </form>
         <input
           type="text"
-          placeholder="Add Todo"
-          name="addTodo"
-          id="addTodo"
-          title="Add Todo"
+          id="search"
+          name="search"
+          placeholder="Search Todos"
         />
-        <button type="submit">Add Todo</button>
-      </form>
-    </div>
+      </div>
 
-    <input type="text" id="search" name="search" placeholder="Search Todos" />
-    <div class="todo-container">
-      <ul id="todoContainer"></ul>
-    </div>
+      <div class="todo-container">
+        <ul id="todoContainer"></ul>
+      </div>
+    </main>
     <script src="./scripts/app.js"></script>
   </body>
 </html>

@@ -63,18 +63,15 @@ const DOM_EVENTS = (() => {
 
   const _todoElement = todo => {
     const element = _stringToHTML(
-      `<div class='todo ${todo.isCompleted ? 'completed' : ''}'>
+      `<li class='todo ${todo.isCompleted ? 'completed' : ''}'>
         <input type="checkbox" id="isComplete${todo.id}" name="isComplete"/>
         <label for="isComplete${todo.id}">${todo.title}</label>
-        <button id='deleteButton${todo.id}'>Delete Todo</button>
-       </div>`,
-      'li'
+        <button id='deleteButton${todo.id}'>Delete</button>
+       </li>`
     )
 
     element.querySelector(`#isComplete${todo.id}`).onclick = () => {
       list.editTodo(todo.id, { isCompleted: !todo.isCompleted })
-      console.log(todo)
-      console.log(searchTodos.value)
       searchTodos.value
         ? addTodosToDOM(list.filterList(searchTodos.value))
         : addTodosToDOM()
@@ -82,7 +79,6 @@ const DOM_EVENTS = (() => {
 
     element.querySelector(`#deleteButton${todo.id}`).onclick = () => {
       list.removeTodo(todo.id)
-      console.log(searchTodos.value)
       searchTodos.value
         ? addTodosToDOM(list.filterList(searchTodos.value))
         : addTodosToDOM()
@@ -93,6 +89,8 @@ const DOM_EVENTS = (() => {
 
   const addTodosToDOM = (todos = list.getList()) => {
     todoContainer.innerHTML = ''
+    todos.length === 0 &&
+      (todoContainer.innerHTML = '<h2>No todos to display</h2>')
     todos.forEach(todo => {
       todoContainer.appendChild(_todoElement(todo))
     })
@@ -102,7 +100,7 @@ const DOM_EVENTS = (() => {
     return new Todo(addTodoForm['addTodo'].value)
   }
 
-  // for (let i = 0; i < 500; i++) {
+  // for (let i = 0; i < 100; i++) {
   //   list.addTodo(new Todo(`This is Todo #${i}`, false))
   // }
 
