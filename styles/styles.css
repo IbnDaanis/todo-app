@@ -163,10 +163,6 @@ main .todo-container ul .todo.completed label {
   text-decoration: line-through;
 }
 
-main .todo-container ul .todo input {
-  display: none;
-}
-
 main .todo-container ul .todo label {
   font-weight: 500;
   width: 100%;
@@ -190,5 +186,63 @@ main .todo-container ul .todo button {
 main .todo-container ul .todo button:hover {
   -webkit-filter: brightness(1.1);
           filter: brightness(1.1);
+}
+
+main .todo-container ul .todo .container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+main .todo-container ul .todo .container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+main .todo-container ul .todo .container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+main .todo-container ul .todo .container .checkmark {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: #eee;
+}
+
+main .todo-container ul .todo .container .checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 8.5px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+main .todo-container ul .todo .container input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+main .todo-container ul .todo .container input:checked ~ .checkmark:after {
+  display: block;
 }
 /*# sourceMappingURL=styles.css.map */

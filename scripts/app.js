@@ -63,9 +63,14 @@ const DOM_EVENTS = (() => {
 
   const _todoElement = todo => {
     const element = _stringToHTML(
+      // <input type="checkbox" id="isComplete${todo.id}" name="isComplete"/>
       `<li class='todo ${todo.isCompleted ? 'completed' : ''}'>
-        <input type="checkbox" id="isComplete${todo.id}" name="isComplete"/>
-        <label for="isComplete${todo.id}">${todo.title}</label>
+        <label for="isComplete${todo.id}" class='container'>${todo.title}
+        <input type="checkbox" id="isComplete${todo.id}" name="isComplete" ${
+        todo.isCompleted && "checked='checked'"
+      }">
+        <span class="checkmark"></span>
+        </label>
         <button id='deleteButton${todo.id}'>Delete</button>
        </li>`
     )
