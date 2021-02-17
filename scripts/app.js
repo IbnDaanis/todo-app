@@ -1,7 +1,11 @@
 class TodoList {
   #list
   constructor() {
-    this.#list = {}
+    this.#list = JSON.parse(localStorage.getItem('TodoList')) || {}
+  }
+
+  saveList = () => {
+    localStorage.setItem('TodoList', JSON.stringify(this.#list))
   }
 
   getList = () => {
@@ -14,17 +18,19 @@ class TodoList {
 
   addTodo = todo => {
     this.#list[todo.id] = todo
+    this.saveList()
     return this
   }
 
   removeTodo = id => {
     delete this.#list[id]
+    this.saveList()
     return this
   }
 
   editTodo = (id, edited) => {
     this.#list[id] = { ...this.#list[id], ...edited }
-    console.log(edited)
+    this.saveList()
     return this
   }
 }
@@ -67,10 +73,12 @@ const DOM_EVENTS = (() => {
       console.log(todo)
       addTodosToDOM()
     }
+
     element.querySelector('#deleteButton').onclick = () => {
       list.removeTodo(todo.id)
       addTodosToDOM()
     }
+
     return element
   }
 
@@ -85,15 +93,13 @@ const DOM_EVENTS = (() => {
     return new Todo(addTodoForm['addTodo'].value)
   }
 
-  for (let i = 0; i < 10; i++) {
-    list.addTodo(new Todo(`This is Todo #${i}`, false))
-  }
   addTodoForm.onsubmit = event => {
     event.preventDefault()
     list.addTodo(addTodoFormSubmit())
     addTodosToDOM()
     addTodoForm.reset()
   }
+
   return {
     addTodoForm,
     addTodosToDOM,
