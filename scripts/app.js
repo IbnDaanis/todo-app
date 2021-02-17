@@ -22,8 +22,9 @@ class TodoList {
     return this
   }
 
-  editTodo = (todo, edited) => {
-    this.#list[todo.id] = { ...this.#list[todo.id], ...edited }
+  editTodo = (id, edited) => {
+    this.#list[id] = { ...this.#list[id], ...edited }
+    console.log(edited)
     return this
   }
 }
@@ -53,13 +54,19 @@ const DOM_EVENTS = (() => {
 
   const _todoElement = todo => {
     const element = _stringToHTML(
-      `<div class='todo'>
-        <p>${todo.title}</p>
+      `<div class='todo ${todo.isCompleted ? 'completed' : ''}'>
+        <input type="checkbox" id="isComplete${todo.id}" name="isComplete"/>
+        <label for="isComplete${todo.id}">${todo.title}</label>
         <button id='deleteButton'>Delete Todo</button>
        </div>`,
       'li'
     )
 
+    element.querySelector(`#isComplete${todo.id}`).onclick = () => {
+      list.editTodo(todo.id, { isCompleted: !todo.isCompleted })
+      console.log(todo)
+      addTodosToDOM()
+    }
     element.querySelector('#deleteButton').onclick = () => {
       list.removeTodo(todo.id)
       addTodosToDOM()
@@ -79,7 +86,7 @@ const DOM_EVENTS = (() => {
   }
 
   for (let i = 0; i < 10; i++) {
-    list.addTodo(new Todo(i, false))
+    list.addTodo(new Todo(`This is Todo #${i}`, false))
   }
   addTodoForm.onsubmit = event => {
     event.preventDefault()
