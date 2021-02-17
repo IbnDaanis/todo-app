@@ -36,12 +36,37 @@ class Todo {
   }
 }
 
-const DOM_EVENTS = (() => {})()
+const DOM_EVENTS = (() => {
+  const addTodoForm = document.querySelector('#addTodoForm')
+  const todoContainer = document.querySelector('#todoContainer')
+
+  const addTodosToDOM = todos => {
+    console.log({ todos })
+    todoContainer.innerHTML = ''
+    todos.forEach(todo => {
+      const element = document.createElement('p')
+      element.textContent = todo.title
+      todoContainer.appendChild(element)
+    })
+  }
+
+  const addTodoToDOM = event => {
+    event.preventDefault()
+    console.log(addTodoForm['addTodo'].value)
+  }
+
+  addTodoForm.onsubmit = event => addTodoToDOM(event)
+
+  return {
+    addTodosToDOM,
+  }
+})()
 
 const newTodoList = new TodoList()
 
 for (let i = 0; i < 10; i++) {
   newTodoList.addTodo(new Todo(i, false))
 }
+DOM_EVENTS.addTodosToDOM(newTodoList.getList())
 
 console.log(newTodoList.getList())
