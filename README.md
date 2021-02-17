@@ -1,2 +1,3 @@
-# todo-app
-Todo App
+# Todo App
+
+- Build with HTML, SCSS and JavaScript
