@@ -29,19 +29,6 @@ button {
   cursor: pointer;
 }
 
-.hide {
-  display: none !important;
-}
-
-.noselect {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 body {
   background: rgb(239, 240, 243);
 }
@@ -140,9 +127,6 @@ main {
         }
 
         label {
-          font-weight: 500;
-          width: 100%;
-          cursor: pointer;
         }
 
         button {
@@ -164,14 +148,20 @@ main {
 
         .container {
           display: block;
+          align-items: center;
+          width: 100%;
+          padding: 0.5rem 0 0.5rem 35px;
           position: relative;
-          padding-left: 35px;
           cursor: pointer;
           font-size: 16px;
+          font-weight: 500;
           -webkit-user-select: none;
           -moz-user-select: none;
           -ms-user-select: none;
           user-select: none;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
 
           input {
             position: absolute;

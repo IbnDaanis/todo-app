@@ -29,18 +29,6 @@ button {
   cursor: pointer;
 }
 
-.hide {
-  display: none !important;
-}
-
-.noselect {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 body {
   background: #eff0f3;
 }
@@ -163,12 +151,6 @@ main .todo-container ul .todo.completed label {
   text-decoration: line-through;
 }
 
-main .todo-container ul .todo label {
-  font-weight: 500;
-  width: 100%;
-  cursor: pointer;
-}
-
 main .todo-container ul .todo button {
   margin-left: 1rem;
   background: #eb1e1e;
@@ -190,14 +172,22 @@ main .todo-container ul .todo button:hover {
 
 main .todo-container ul .todo .container {
   display: block;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding: 0.5rem 0 0.5rem 35px;
   position: relative;
-  padding-left: 35px;
   cursor: pointer;
   font-size: 16px;
+  font-weight: 500;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 main .todo-container ul .todo .container input {
