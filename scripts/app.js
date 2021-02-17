@@ -1,15 +1,14 @@
 class TodoList {
-  #list
   constructor() {
-    this.#list = JSON.parse(localStorage.getItem('TodoList')) || {}
+    this.list = JSON.parse(localStorage.getItem('TodoList')) || {}
   }
 
   saveList = () => {
-    localStorage.setItem('TodoList', JSON.stringify(this.#list))
+    localStorage.setItem('TodoList', JSON.stringify(this.list))
   }
 
   getList = () => {
-    return Object.entries(this.#list).map(item => item[1])
+    return Object.entries(this.list).map(item => item[1])
   }
 
   filterList = query => {
@@ -19,19 +18,19 @@ class TodoList {
   }
 
   addTodo = todo => {
-    this.#list[todo.id] = todo
+    this.list[todo.id] = todo
     this.saveList()
     return this
   }
 
   removeTodo = id => {
-    delete this.#list[id]
+    delete this.list[id]
     this.saveList()
     return this
   }
 
   editTodo = (id, edited) => {
-    this.#list[id] = { ...this.#list[id], ...edited }
+    this.list[id] = { ...this.list[id], ...edited }
     this.saveList()
     return this
   }
