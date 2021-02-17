@@ -48,4 +48,10 @@ button {
   -ms-user-select: none;
   user-select: none;
 }
+
+.todo-container ul li .todo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
 /*# sourceMappingURL=styles.css.map */

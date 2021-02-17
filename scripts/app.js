@@ -41,22 +41,36 @@ const DOM_EVENTS = (() => {
   const addTodoForm = document.querySelector('#addTodoForm')
   const todoContainer = document.querySelector('#todoContainer')
 
+  const _stringToHTML = (str, elementType) => {
+    const fragment = elementType
+      ? document.createElement(elementType)
+      : document.createDocumentFragment()
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(str, 'text/html')
+    ;[...doc.body.children].forEach(element => fragment.appendChild(element))
+    return fragment
+  }
+
+  const _todoElement = todo => {
+    const element = _stringToHTML(
+      `<div class='todo'>
+        <p>${todo.title}</p>
+        <button id='deleteButton'>Delete Todo</button>
+       </div>`,
+      'li'
+    )
+
+    element.querySelector('#deleteButton').onclick = () => {
+      list.removeTodo(todo.id)
+      addTodosToDOM()
+    }
+    return element
+  }
+
   const addTodosToDOM = () => {
     todoContainer.innerHTML = ''
     list.getList().forEach(todo => {
-      const element = document.createElement('div')
-      const text = document.createElement('p')
-      text.textContent = todo.title
-      const deleteButton = document.createElement('button')
-      deleteButton.textContent = 'Delete Todo'
-      deleteButton.onclick = () => {
-        list.removeTodo(todo.id)
-        addTodosToDOM()
-      }
-
-      element.appendChild(text)
-      element.appendChild(deleteButton)
-      todoContainer.appendChild(element)
+      todoContainer.appendChild(_todoElement(todo))
     })
   }
 
@@ -70,6 +84,7 @@ const DOM_EVENTS = (() => {
   addTodoForm.onsubmit = event => {
     event.preventDefault()
     list.addTodo(addTodoFormSubmit())
+    addTodosToDOM()
     addTodoForm.reset()
   }
   return {

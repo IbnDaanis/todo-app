@@ -49,3 +49,13 @@ button {
   -ms-user-select: none;
   user-select: none;
 }
+
+.todo-container {
+  ul {
+    li {
+      .todo {
+        display: flex;
+      }
+    }
+  }
+}
