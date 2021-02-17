@@ -74,12 +74,18 @@ const DOM_EVENTS = (() => {
     element.querySelector(`#isComplete${todo.id}`).onclick = () => {
       list.editTodo(todo.id, { isCompleted: !todo.isCompleted })
       console.log(todo)
-      addTodosToDOM()
+      console.log(searchTodos.value)
+      searchTodos.value
+        ? addTodosToDOM(list.filterList(searchTodos.value))
+        : addTodosToDOM()
     }
 
     element.querySelector(`#deleteButton${todo.id}`).onclick = () => {
       list.removeTodo(todo.id)
-      addTodosToDOM()
+      console.log(searchTodos.value)
+      searchTodos.value
+        ? addTodosToDOM(list.filterList(searchTodos.value))
+        : addTodosToDOM()
     }
 
     return element
