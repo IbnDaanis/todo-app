@@ -14,7 +14,6 @@ class TodoList {
 
   addTodo = todo => {
     this.#list[todo.id] = todo
-    DOM_EVENTS.addTodosToDOM(this.getList())
     return this
   }
 
@@ -38,27 +37,41 @@ class Todo {
 }
 
 const DOM_EVENTS = (() => {
+  const list = new TodoList()
   const addTodoForm = document.querySelector('#addTodoForm')
   const todoContainer = document.querySelector('#todoContainer')
 
-  const addTodosToDOM = todos => {
+  const addTodosToDOM = () => {
     todoContainer.innerHTML = ''
-    todos.forEach(todo => {
-      const element = document.createElement('p')
-      element.textContent = todo.title
+    list.getList().forEach(todo => {
+      const element = document.createElement('div')
+      const text = document.createElement('p')
+      text.textContent = todo.title
+      const deleteButton = document.createElement('button')
+      deleteButton.textContent = 'Delete Todo'
+      deleteButton.onclick = () => {
+        list.removeTodo(todo.id)
+        addTodosToDOM()
+      }
+
+      element.appendChild(text)
+      element.appendChild(deleteButton)
       todoContainer.appendChild(element)
     })
   }
 
   const addTodoFormSubmit = () => {
-    const newTodo = new Todo(addTodoForm['addTodo'].value)
-
-    console.log(addTodoForm['addTodo'].value)
-    addTodoForm.reset()
-
-    return newTodo
+    return new Todo(addTodoForm['addTodo'].value)
   }
 
+  for (let i = 0; i < 10; i++) {
+    list.addTodo(new Todo(i, false))
+  }
+  addTodoForm.onsubmit = event => {
+    event.preventDefault()
+    list.addTodo(addTodoFormSubmit())
+    addTodoForm.reset()
+  }
   return {
     addTodoForm,
     addTodosToDOM,
@@ -66,17 +79,4 @@ const DOM_EVENTS = (() => {
   }
 })()
 
-const newTodoList = new TodoList()
-
-for (let i = 0; i < 10; i++) {
-  newTodoList.addTodo(new Todo(i, false))
-}
-
-DOM_EVENTS.addTodosToDOM(newTodoList.getList())
-
-DOM_EVENTS.addTodoForm.onsubmit = event => {
-  event.preventDefault()
-  newTodoList.addTodo(DOM_EVENTS.addTodoFormSubmit())
-}
-
-console.log(newTodoList.getList())
+DOM_EVENTS.addTodosToDOM()
