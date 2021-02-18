@@ -247,12 +247,15 @@ main .modal {
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
   opacity: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 main .modal .container {
@@ -260,7 +263,7 @@ main .modal .container {
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
-  margin: 15rem 0 0;
+  margin: 0 0 6rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

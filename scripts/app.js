@@ -44,6 +44,8 @@ const DOM_EVENTS = (() => {
   const addTodoForm = document.querySelector('#addTodoForm')
   const todoContainer = document.querySelector('#todoContainer')
   const searchTodos = document.querySelector('#search')
+  const modalForDeletingTodo = document.querySelector('#modalForDeletingTodo')
+  const deleteTodoButton = document.querySelector('#deleteTodo')
 
   const _stringToHTML = (str, elementType) => {
     const fragment = elementType
@@ -53,6 +55,36 @@ const DOM_EVENTS = (() => {
     const doc = parser.parseFromString(str, 'text/html')
     ;[...doc.body.children].forEach(element => fragment.appendChild(element))
     return fragment
+  }
+
+  const _closeModal = () => {
+    modalForDeletingTodo.style.opacity = '0'
+    setTimeout(() => {
+      modalForDeletingTodo.style.display = 'none'
+    }, 310)
+  }
+
+  const _deleteTodoConfirmation = id => {
+    const todo = id
+    modalForDeletingTodo.style.display = 'flex'
+    setTimeout(() => {
+      modalForDeletingTodo.style.opacity = '1'
+    }, 10)
+
+    deleteTodoButton.onclick = () => {
+      list.removeTodo(todo)
+      _closeModal()
+      searchTodos.value
+        ? addTodosToDOM(list.filterList(searchTodos.value))
+        : addTodosToDOM()
+    }
+
+    document.body.addEventListener('click', ({ target }) => {
+      if (['closeModal', 'modalForDeletingTodo'].includes(target.id)) {
+        _closeModal()
+        document.removeEventListener('click', _closeModal)
+      }
+    })
   }
 
   const _todoElement = todo => {
@@ -78,10 +110,8 @@ const DOM_EVENTS = (() => {
     }
 
     element.querySelector(`#deleteButton${todo.id}`).onclick = () => {
-      list.removeTodo(todo.id)
-      searchTodos.value
-        ? addTodosToDOM(list.filterList(searchTodos.value))
-        : addTodosToDOM()
+      _deleteTodoConfirmation(todo.id)
+      // list.removeTodo(todo.id)
     }
 
     return element
