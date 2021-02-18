@@ -1,21 +1,24 @@
+class Todo {
+  constructor(title) {
+    this.title = title
+    this.isCompleted = false
+    this.id = Math.random().toString(36).substr(2, 9)
+  }
+}
+
 class TodoList {
   constructor() {
     this.list = JSON.parse(localStorage.getItem('TodoList')) || {}
   }
 
-  saveList = () => {
-    localStorage.setItem('TodoList', JSON.stringify(this.list))
-  }
+  saveList = () => localStorage.setItem('TodoList', JSON.stringify(this.list))
 
-  getList = () => {
-    return Object.entries(this.list).map(item => item[1])
-  }
+  getList = () => Object.entries(this.list).map(item => item[1])
 
-  filterList = query => {
-    return this.getList().filter(item =>
+  filterList = query =>
+    this.getList().filter(item =>
       item.title.toLowerCase().includes(query.trim().toLowerCase())
     )
-  }
 
   addTodo = todo => {
     this.list[todo.id] = todo
@@ -33,14 +36,6 @@ class TodoList {
     this.list[id] = { ...this.list[id], ...edited }
     this.saveList()
     return this
-  }
-}
-
-class Todo {
-  constructor(title) {
-    this.title = title
-    this.isCompleted = false
-    this.id = Math.random().toString(36).substr(2, 9)
   }
 }
 
