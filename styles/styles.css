@@ -25,8 +25,9 @@ a {
 }
 
 button {
-  outline: 0;
+  outline: none;
   cursor: pointer;
+  display: block;
 }
 
 body {
@@ -67,11 +68,10 @@ main .add-todo-form input {
   border-radius: 5px;
   width: 100%;
   font-size: 1rem;
-  -webkit-transition: 0.1s ease-in-out;
-  transition: 0.1s ease-in-out;
 }
 
 main .add-todo-form input:focus {
+  outline: none;
   border: 1px solid #1e70eb;
 }
 
@@ -140,7 +140,7 @@ main .todo-container ul .todo {
 }
 
 main .todo-container ul .todo:hover {
-  background: #eeeeee;
+  background: #eee;
 }
 
 main .todo-container ul .todo.completed {
@@ -212,6 +212,8 @@ main .todo-container ul .todo .container .checkmark {
   width: 25px;
   border-radius: 50%;
   background-color: #eee;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 main .todo-container ul .todo .container .checkmark:after {
