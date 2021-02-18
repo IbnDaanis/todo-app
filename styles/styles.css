@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 a {
@@ -31,7 +31,7 @@ button {
 }
 
 body {
-  background: #eff0f3;
+  background: #3e5ebe;
 }
 
 main {
@@ -51,6 +51,7 @@ main {
 main h1 {
   font-size: 4em;
   margin: 2rem 0;
+  color: white;
 }
 
 main .add-todo-form {
@@ -103,17 +104,20 @@ main .add-todo-form form button {
   transition: 0.2s ease-in-out;
 }
 
-main .add-todo-form form button:hover {
-  -webkit-filter: brightness(1.1);
-          filter: brightness(1.1);
+@media (hover: hover) {
+  main .add-todo-form form button:hover {
+    -webkit-filter: brightness(1.1);
+            filter: brightness(1.1);
+  }
 }
 
 main .todo-container {
   width: 500px;
   max-width: 95%;
+  max-height: 400px;
   background: white;
-  padding: 1rem 0;
   border-radius: 5px;
+  overflow: hidden;
 }
 
 main .todo-container h2 {
@@ -140,8 +144,10 @@ main .todo-container ul .todo {
   transition: 0.2s ease-in-out;
 }
 
-main .todo-container ul .todo:hover {
-  background: #eee;
+@media (hover: hover) {
+  main .todo-container ul .todo:hover {
+    background: #eee;
+  }
 }
 
 main .todo-container ul .todo.completed {
@@ -166,9 +172,11 @@ main .todo-container ul .todo button {
   transition: 0.2s ease-in-out;
 }
 
-main .todo-container ul .todo button:hover {
-  -webkit-filter: brightness(1.1);
-          filter: brightness(1.1);
+@media (hover: hover) {
+  main .todo-container ul .todo button:hover {
+    -webkit-filter: brightness(1.1);
+            filter: brightness(1.1);
+  }
 }
 
 main .todo-container ul .todo .container {
@@ -199,8 +207,10 @@ main .todo-container ul .todo .container input {
   width: 0;
 }
 
-main .todo-container ul .todo .container:hover input ~ .checkmark {
-  background-color: #ccc;
+@media (hover: hover) {
+  main .todo-container ul .todo .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
 }
 
 main .todo-container ul .todo .container .checkmark {
@@ -292,9 +302,11 @@ main .modal .container button {
   transition: 0.2s ease-in-out;
 }
 
-main .modal .container button:hover {
-  -webkit-filter: brightness(0.9);
-          filter: brightness(0.9);
+@media (hover: hover) {
+  main .modal .container button:hover {
+    -webkit-filter: brightness(0.9);
+            filter: brightness(0.9);
+  }
 }
 
 main .modal .container button.yes {

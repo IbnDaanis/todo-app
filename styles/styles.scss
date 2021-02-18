@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 a {
@@ -31,7 +31,7 @@ button {
 }
 
 body {
-  background: rgb(239, 240, 243);
+  background: rgb(62, 94, 190);
 }
 
 main {
@@ -43,6 +43,7 @@ main {
   h1 {
     font-size: 4em;
     margin: 2rem 0;
+    color: white;
   }
 
   .add-todo-form {
@@ -86,9 +87,10 @@ main {
         font-size: 1rem;
         font-weight: 500;
         transition: 0.2s ease-in-out;
-
-        &:hover {
-          filter: brightness(1.1);
+        @media (hover: hover) {
+          &:hover {
+            filter: brightness(1.1);
+          }
         }
       }
     }
@@ -97,10 +99,10 @@ main {
   .todo-container {
     width: 500px;
     max-width: 95%;
+    max-height: 400px;
     background: white;
-    padding: 1rem 0;
     border-radius: 5px;
-
+    overflow: hidden;
     h2 {
       text-align: center;
     }
@@ -115,9 +117,10 @@ main {
         align-items: center;
         padding: 0.5rem 1rem;
         transition: 0.2s ease-in-out;
-
-        &:hover {
-          background: #eee;
+        @media (hover: hover) {
+          &:hover {
+            background: #eee;
+          }
         }
 
         &.completed {
@@ -140,8 +143,10 @@ main {
           font-weight: 500;
           transition: 0.2s ease-in-out;
 
-          &:hover {
-            filter: brightness(1.1);
+          @media (hover: hover) {
+            &:hover {
+              filter: brightness(1.1);
+            }
           }
         }
 
@@ -170,8 +175,10 @@ main {
             width: 0;
           }
 
-          &:hover input ~ .checkmark {
-            background-color: #ccc;
+          @media (hover: hover) {
+            &:hover input ~ .checkmark {
+              background-color: #ccc;
+            }
           }
 
           .checkmark {
@@ -250,8 +257,10 @@ main {
         display: block;
         transition: 0.2s ease-in-out;
 
-        &:hover {
-          filter: brightness(0.9);
+        @media (hover: hover) {
+          &:hover {
+            filter: brightness(0.9);
+          }
         }
 
         &.yes {
