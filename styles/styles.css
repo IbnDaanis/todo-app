@@ -240,7 +240,7 @@ main .todo-container ul .todo .container input:checked ~ .checkmark:after {
 }
 
 main .modal {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
