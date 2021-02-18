@@ -1,7 +1,8 @@
 class Todo {
-  constructor(title) {
+  constructor(title, dueDate) {
     this.title = title
     this.isCompleted = false
+    this.dueDate = dueDate
     this.id = Math.random().toString(36).substr(2, 9)
   }
 }
@@ -46,7 +47,8 @@ const DOM_EVENTS = (() => {
   const searchTodos = document.querySelector('#search')
   const modalForDeletingTodo = document.querySelector('#modalForDeletingTodo')
   const deleteTodoButton = document.querySelector('#deleteTodo')
-  const scrollBarElement = document.querySelector('#my-scrollbar')
+
+  addTodoForm['dueDate'].value = dateFns.format(new Date(), 'YYYY-MM-DD')
 
   const _stringToHTML = (str, elementType) => {
     const fragment = elementType
@@ -132,7 +134,7 @@ const DOM_EVENTS = (() => {
   }
 
   const addTodoFormSubmit = () => {
-    return new Todo(addTodoForm['addTodo'].value)
+    return new Todo(addTodoForm['addTodo'].value, addTodoForm['dueDate'].value)
   }
 
   addTodoForm.onsubmit = event => {
@@ -146,7 +148,12 @@ const DOM_EVENTS = (() => {
       })
     }, 100)
     addTodoForm.reset()
+    addTodoForm['dueDate'].value = dateFns.format(new Date(), 'YYYY-MM-DD')
   }
+
+  // for (let i = 0; i < 100; i++) {
+  //   list.addTodo(new Todo(i, false))
+  // }
 
   searchTodos.oninput = ({ target }) => {
     addTodosToDOM(list.filterList(target.value))

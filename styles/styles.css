@@ -70,6 +70,7 @@ main .add-todo-form input {
   border-radius: 5px;
   width: 100%;
   font-size: 1rem;
+  margin-right: 0.5rem;
 }
 
 main .add-todo-form input:focus {
@@ -77,21 +78,33 @@ main .add-todo-form input:focus {
   border: 1px solid #1e70eb;
 }
 
+main .add-todo-form .add-todo {
+  min-width: 180px;
+}
+
+main .add-todo-form .due-date {
+  width: 180px;
+}
+
 main .add-todo-form form {
   margin-bottom: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 main .add-todo-form form input {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+  margin-bottom: 0.5rem;
 }
 
 main .add-todo-form form button {
-  margin-left: 1rem;
   color: white;
   background: #1e70eb;
   border: 0;
@@ -122,6 +135,7 @@ main .todo-container {
 
 main .todo-container h2 {
   text-align: center;
+  padding: 1rem;
 }
 
 main .todo-container ul {
@@ -273,7 +287,7 @@ main .modal .container {
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
-  margin: 0 0 6rem;
+  margin: 0 0 9rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

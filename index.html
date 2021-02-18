@@ -19,6 +19,15 @@
             name="addTodo"
             id="addTodo"
             title="Add Todo"
+            class="add-todo"
+            required
+          />
+          <input
+            type="date"
+            name="dueDate"
+            id="dueDate"
+            title="Add a due date"
+            class="due-date"
             required
           />
           <button type="submit">Add Todo</button>
@@ -43,6 +52,11 @@
       </div>
     </main>
 
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.min.js"
+      integrity="sha512-F+u8eWHrfY8Xw9BLzZ8rG/0wIvs0y+JyRJrXjp3VjtFPylAEEGwKbua5Ip/oiVhaTDaDs4eU2Xtsxjs/9ag2bQ=="
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/8.6.0/smooth-scrollbar.min.js"
       integrity="sha512-/i9hnD/QS+oyspghC8CLAzA9eh+GKAAXhpdakrfsfk9Q1qJel3cR8cWYhPNe6sdExCd9lu1tIxOFECwD0WlU7A=="
