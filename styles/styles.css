@@ -45,6 +45,7 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
 }
 
 main h1 {
@@ -236,5 +237,65 @@ main .todo-container ul .todo .container input:checked ~ .checkmark {
 
 main .todo-container ul .todo .container input:checked ~ .checkmark:after {
   display: block;
+}
+
+main .modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main .modal .container {
+  background: white;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  margin: 15rem 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+}
+
+main .modal .container p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+main .modal .container button {
+  margin-left: 1rem;
+  width: 64px;
+  height: 32px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  display: block;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+main .modal .container button:hover {
+  -webkit-filter: brightness(0.9);
+          filter: brightness(0.9);
+}
+
+main .modal .container button.yes {
+  background: #e60c0c;
+  color: white;
 }
 /*# sourceMappingURL=styles.css.map */

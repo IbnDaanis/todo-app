@@ -38,6 +38,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 
   h1 {
     font-size: 4em;
@@ -208,6 +209,52 @@ main {
           display: block;
         }
       }
+    }
+  }
+
+  .modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+
+    .container {
+      background: white;
+      height: min-content;
+      margin: 15rem 0 0;
+      display: flex;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      p {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      button {
+        margin-left: 1rem;
+        width: 64px;
+        height: 32px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 500;
+        display: block;
+        transition: 0.2s ease-in-out;
+        &:hover {
+          filter: brightness(0.9);
+        }
+        &.yes {
+          background: rgb(230, 12, 12);
+          color: white;
+        }
+      }
+    }
+    .background {
     }
   }
 }
