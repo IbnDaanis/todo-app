@@ -49,13 +49,14 @@
       crossorigin="anonymous"
     ></script>
     <script>
-      const Scrollbar = window.Scrollbar
-
-      Scrollbar.init(document.querySelector('#my-scrollbar'), {
-        damping: 0.1,
-        renderByPixels: true,
-        continuousScrolling: true,
-      })
+      const scrollbar = Scrollbar.init(
+        document.querySelector('#my-scrollbar'),
+        {
+          damping: 0.1,
+          renderByPixels: true,
+          continuousScrolling: true,
+        }
+      )
     </script>
     <script src="./scripts/app.js"></script>
   </body>

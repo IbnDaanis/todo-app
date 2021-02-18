@@ -46,6 +46,7 @@ const DOM_EVENTS = (() => {
   const searchTodos = document.querySelector('#search')
   const modalForDeletingTodo = document.querySelector('#modalForDeletingTodo')
   const deleteTodoButton = document.querySelector('#deleteTodo')
+  const scrollBarElement = document.querySelector('#my-scrollbar')
 
   const _stringToHTML = (str, elementType) => {
     const fragment = elementType
@@ -138,6 +139,12 @@ const DOM_EVENTS = (() => {
     event.preventDefault()
     list.addTodo(addTodoFormSubmit())
     addTodosToDOM()
+    setTimeout(() => {
+      scrollbar.scrollIntoView(todoContainer.lastElementChild, {
+        alignToTop: true,
+        offsetBottom: 0,
+      })
+    }, 100)
     addTodoForm.reset()
   }
 
