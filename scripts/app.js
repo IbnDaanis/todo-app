@@ -57,22 +57,27 @@ const DOM_EVENTS = (() => {
     return fragment
   }
 
-  const _closeModal = () => {
-    modalForDeletingTodo.style.opacity = '0'
-    setTimeout(() => {
-      modalForDeletingTodo.style.display = 'none'
-    }, 310)
-  }
-
-  const _deleteTodoConfirmation = id => {
-    const todo = id
+  const _openModal = () => {
+    document.body.style.overflow = 'hidden'
     modalForDeletingTodo.style.display = 'flex'
     setTimeout(() => {
       modalForDeletingTodo.style.opacity = '1'
-    }, 10)
+    }, 0)
+  }
+
+  const _closeModal = () => {
+    document.body.style.overflow = 'unset'
+    modalForDeletingTodo.style.opacity = '0'
+    setTimeout(() => {
+      modalForDeletingTodo.style.display = 'none'
+    }, 300)
+  }
+
+  const _deleteTodoConfirmation = id => {
+    _openModal()
 
     deleteTodoButton.onclick = () => {
-      list.removeTodo(todo)
+      list.removeTodo(id)
       _closeModal()
       searchTodos.value
         ? addTodosToDOM(list.filterList(searchTodos.value))
@@ -111,7 +116,6 @@ const DOM_EVENTS = (() => {
 
     element.querySelector(`#deleteButton${todo.id}`).onclick = () => {
       _deleteTodoConfirmation(todo.id)
-      // list.removeTodo(todo.id)
     }
 
     return element
