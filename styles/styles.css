@@ -281,6 +281,7 @@ main h1 {
   border: 0;
   border-radius: 5px;
   outline: 0;
+  height: 40px;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 500;
@@ -338,11 +339,11 @@ main h1 {
   margin-bottom: 1rem;
 }
 
-.scrollbar-track {
+.wrapper .scrollbar-track {
   background: none !important;
 }
 
-.todo-container {
+.wrapper .todo-container {
   touch-action: none;
   -ms-touch-action: none;
   max-height: 40vh;
@@ -350,16 +351,16 @@ main h1 {
   position: relative;
 }
 
-.todo-container h2 {
+.wrapper .todo-container h2 {
   text-align: center;
   padding: 1rem;
 }
 
-.todo-container ul {
+.wrapper .todo-container ul {
   list-style: none;
 }
 
-.todo-container ul .todo {
+.wrapper .todo-container ul .todo {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -376,20 +377,20 @@ main h1 {
 }
 
 @media (hover: hover) {
-  .todo-container ul .todo:hover {
+  .wrapper .todo-container ul .todo:hover {
     background: #eee;
   }
 }
 
-.todo-container ul .todo.completed {
+.wrapper .todo-container ul .todo.completed {
   opacity: 0.5;
 }
 
-.todo-container ul .todo.completed label {
+.wrapper .todo-container ul .todo.completed label {
   text-decoration: line-through;
 }
 
-.todo-container ul .todo button {
+.wrapper .todo-container ul .todo button {
   margin-left: 1rem;
   background: #eb1e1e;
   color: white;
@@ -404,13 +405,13 @@ main h1 {
 }
 
 @media (hover: hover) {
-  .todo-container ul .todo button:hover {
+  .wrapper .todo-container ul .todo button:hover {
     -webkit-filter: brightness(1.1);
             filter: brightness(1.1);
   }
 }
 
-.todo-container ul .todo .container {
+.wrapper .todo-container ul .todo .container {
   display: block;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -430,7 +431,7 @@ main h1 {
   overflow: hidden;
 }
 
-.todo-container ul .todo .container input {
+.wrapper .todo-container ul .todo .container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -439,12 +440,12 @@ main h1 {
 }
 
 @media (hover: hover) {
-  .todo-container ul .todo .container:hover input ~ .checkmark {
+  .wrapper .todo-container ul .todo .container:hover input ~ .checkmark {
     background-color: #ccc;
   }
 }
 
-.todo-container ul .todo .container .checkmark {
+.wrapper .todo-container ul .todo .container .checkmark {
   position: absolute;
   top: 50%;
   left: 0;
@@ -458,7 +459,7 @@ main h1 {
   transition: 0.2s ease-in-out;
 }
 
-.todo-container ul .todo .container .checkmark:after {
+.wrapper .todo-container ul .todo .container .checkmark:after {
   content: '';
   position: absolute;
   display: none;
@@ -472,35 +473,50 @@ main h1 {
   transform: rotate(45deg);
 }
 
-.todo-container ul .todo .container input:checked ~ .checkmark {
+.wrapper .todo-container ul .todo .container input:checked ~ .checkmark {
   background-color: #2196f3;
 }
 
-.todo-container ul .todo .container input:checked ~ .checkmark:after {
+.wrapper .todo-container ul .todo .container input:checked ~ .checkmark:after {
   display: block;
 }
 
-.page-numbers {
+.pages-scrollbar {
   width: 500px;
   max-width: 95%;
-  background: white;
   border-radius: 5px;
-  overflow: hidden;
+  background: white;
   margin-bottom: 3rem;
+  overflow: hidden;
+  padding: 2px;
+}
+
+.pages-scrollbar .page-numbers {
+  width: 500px;
+  max-width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 1rem 0;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem 0.5rem 1.5rem;
 }
 
-.page-numbers button {
-  margin-left: 1rem;
-  background: #b4b4b4;
+.pages-scrollbar .page-numbers button {
+  margin: 0 0.25rem 0;
+  background: #666666;
   color: white;
   border: 0;
   border-radius: 5px;
   outline: 0;
   padding: 0.5rem 1rem;
+  width: 50px;
+  height: 50px;
   font-size: 1rem;
   font-weight: 700;
   -webkit-transition: 0.2s ease-in-out;
@@ -508,7 +524,7 @@ main h1 {
 }
 
 @media (hover: hover) {
-  .page-numbers button:hover {
+  .pages-scrollbar .page-numbers button:hover {
     -webkit-filter: brightness(1.1);
             filter: brightness(1.1);
   }

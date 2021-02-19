@@ -284,7 +284,7 @@ const DOM_EVENTS = (() => {
     addTodoForm['dueDate'].value = dateToday
   }
 
-  // for (let i = 0; i < 100; i++) {
+  // for (let i = 0; i < 200; i++) {
   //   todoList.addTodo(new Todo(`Todo ${i}`, false))
   // }
 

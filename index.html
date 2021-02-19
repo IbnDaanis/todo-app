@@ -36,7 +36,11 @@
         </div>
       </div>
 
-      <div class="page-numbers" id="pageNumbers"></div>
+      <div class="pages-scrollbar">
+        <div id="pagesScrollbar">
+          <div class="page-numbers" id="pageNumbers"></div>
+        </div>
+      </div>
 
       <div class="modal" id="modalForAddingTodo">
         <div class="container">
@@ -112,6 +116,16 @@
     <script>
       const scrollbar = Scrollbar.init(
         document.querySelector('#my-scrollbar'),
+        {
+          damping: 0.1,
+          renderByPixels: true,
+          continuousScrolling: true,
+          alwaysShowTracks: true,
+        }
+      )
+
+      const scrollbarPages = Scrollbar.init(
+        document.querySelector('#pagesScrollbar'),
         {
           damping: 0.1,
           renderByPixels: true,
