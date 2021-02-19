@@ -95,7 +95,7 @@ main h1 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem;
   border-radius: 5px;
 }
 
@@ -228,6 +228,7 @@ main h1 {
 
 .add-todo-form form .date-and-category input {
   margin-right: 0.5rem;
+  min-width: 170px;
 }
 
 .add-todo-form form .date-and-category label {
@@ -257,6 +258,20 @@ main h1 {
     -webkit-filter: brightness(1.1);
             filter: brightness(1.1);
   }
+}
+
+.add-todo-form .search-and-filter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.add-todo-form .search-and-filter input {
+  margin-right: 0.5rem;
+}
+
+.add-todo-form .search-and-filter select {
+  width: 200px;
 }
 
 .wrapper {

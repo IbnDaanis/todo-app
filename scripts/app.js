@@ -49,6 +49,7 @@ const DOM_EVENTS = (() => {
   const deleteTodoButton = document.querySelector('#deleteTodo')
   const pageNumbers = document.querySelector('#pageNumbers')
   const categorySelect = document.querySelector('#category')
+  const categoryFilter = document.querySelector('#categoryFilter')
   const addTodoCategoryForm = document.querySelector('#addTodoCategoryForm')
   const addTodoCategoryButton = document.querySelector('#addTodoCategoryButton')
   const modalForTodoCategories = document.querySelector(
@@ -58,15 +59,6 @@ const DOM_EVENTS = (() => {
   const todoList = new TodoList()
 
   let page = 0
-
-  console.log([
-    ...new Set(
-      todoList
-        .getList()
-        .filter(item => item.category)
-        .map(item => item.category)
-    ),
-  ])
 
   const categories =
     [
@@ -86,13 +78,31 @@ const DOM_EVENTS = (() => {
   const _createCategories = isCategoryNew => {
     console.log({ categories })
     categorySelect.innerHTML = ''
+    categoryFilter.innerHTML = ''
+
+    const filterMessage = document.createElement('option')
+    filterMessage.textContent = 'Filter by Category'
+    filterMessage.value = ''
+
+    categoryFilter.appendChild(filterMessage)
+
     categories.forEach(category => {
       const option = document.createElement('option')
       option.textContent = category
       option.value = category
-      if (isCategoryNew && category === categories[categories.length - 1])
+
+      const option2 = document.createElement('option')
+      option2.textContent = category
+      option2.value = category
+
+      if (isCategoryNew && category === categories[categories.length - 1]) {
         option.selected = true
+        option2.selected = true
+      }
+
       categorySelect.appendChild(option)
+
+      categoryFilter.appendChild(option2)
     })
   }
 
@@ -108,6 +118,10 @@ const DOM_EVENTS = (() => {
       addTodoCategoryForm.reset()
     }
 
+    categoryFilter.onchange = ({ target }) => {
+      addTodosToDOM(todoList.getList(), target.value)
+    }
+
     document.body.addEventListener('click', ({ target }) => {
       if (['addTodoCategory', 'modalForTodoCategories'].includes(target.id)) {
         _closeModal(modalForTodoCategories)
@@ -116,10 +130,12 @@ const DOM_EVENTS = (() => {
     })
   }
 
-  const addPageNumbers = (todos = todoList.getList().length) => {
+  const _addPageNumbers = (todos = todoList.getList().length) => {
     pageNumbers.innerHTML = ''
 
-    for (let i = 0; i < todos / 20; i++) {
+    const length = todos || 1
+
+    for (let i = 0; i < length / 20; i++) {
       const button = document.createElement('button')
       button.textContent = i + 1
 
@@ -227,6 +243,10 @@ const DOM_EVENTS = (() => {
     todosToDisplay.forEach(todo => {
       todoContainer.appendChild(_todoElement(todo))
     })
+
+    filter
+      ? _addPageNumbers(todosToDisplay.length)
+      : _addPageNumbers(todos.length)
   }
 
   const addTodoFormSubmit = () =>
@@ -258,16 +278,13 @@ const DOM_EVENTS = (() => {
   searchTodos.oninput = ({ target }) => {
     addTodosToDOM(todoList.filterList(target.value))
     console.log(todoList.filterList(target.value).length)
-    addPageNumbers(todoList.filterList(target.value).length)
   }
 
   return {
     addTodosToDOM,
-    addPageNumbers,
     createCategoryOptions,
   }
 })()
 
 DOM_EVENTS.addTodosToDOM()
-DOM_EVENTS.addPageNumbers()
 DOM_EVENTS.createCategoryOptions()

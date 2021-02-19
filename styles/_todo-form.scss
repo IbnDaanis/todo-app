@@ -38,6 +38,7 @@
 
       input {
         margin-right: 0.5rem;
+        min-width: 170px;
       }
 
       label {
@@ -66,6 +67,18 @@
           filter: brightness(1.1);
         }
       }
+    }
+  }
+
+  .search-and-filter {
+    display: flex;
+
+    input {
+      margin-right: 0.5rem;
+    }
+
+    select {
+      width: 200px;
     }
   }
 }
