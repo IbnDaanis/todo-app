@@ -239,8 +239,6 @@ const DOM_EVENTS = (() => {
     todos = query || todoList.getList(),
     filter = null
   ) => {
-    console.log(todos.slice(page * 20, page * 20 + 20))
-
     let todosToDisplay = todos.filter(todo =>
       category ? todo.category === category : true
     )
@@ -249,6 +247,7 @@ const DOM_EVENTS = (() => {
     console.log('First: ', todosToDisplay)
 
     if (sorter) {
+      page = 0
       console.log({ sorter, direction })
 
       if (sorter === 'category') {
@@ -271,10 +270,10 @@ const DOM_EVENTS = (() => {
         todosToDisplay = todosToDisplay.sort().reverse()
       }
 
-      todosToDisplay = todosToDisplay.slice(page * 20, page * 20 + 20)
-
       console.log({ todosToDisplay })
     }
+
+    todosToDisplay = todosToDisplay.slice(page * 20, page * 20 + 20)
 
     todoContainer.innerHTML = ''
 
@@ -341,8 +340,12 @@ const DOM_EVENTS = (() => {
     }
   }
 
-  // for (let i = 0; i < 200; i++) {
-  //   todoList.addTodo(new Todo(`Todo ${i}`, false))
+  // for (let i = 0; i < 100; i++) {
+  //   todoList.addTodo(new Todo(`Todo ${i}`, false, 'First'))
+  // }
+
+  // for (let i = 0; i < 100; i++) {
+  //   todoList.addTodo(new Todo(`Todo Second ${i}`, false, 'Second'))
   // }
 
   searchTodos.oninput = ({ target }) => {
