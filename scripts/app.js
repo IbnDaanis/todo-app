@@ -121,6 +121,7 @@ const DOM_EVENTS = (() => {
 
     categoryFilter.onchange = ({ target }) => {
       category = target.value
+      page = 0
       addTodosToDOM()
     }
 
@@ -140,6 +141,9 @@ const DOM_EVENTS = (() => {
     for (let i = 0; i < length / 20; i++) {
       const button = document.createElement('button')
       button.textContent = i + 1
+      if (i === page) {
+        button.style.background = 'red'
+      }
 
       button.onclick = () => {
         page = i
@@ -319,13 +323,14 @@ const DOM_EVENTS = (() => {
 
   const addTodoSorting = () => {
     sort.onchange = () => {
-      console.log(sort.value)
       options.sorter = sort.value
+      page = 0
       addTodosToDOM()
     }
 
     sortMode.onchange = () => {
       options.direction = sortMode.value
+      page = 0
       addTodosToDOM()
     }
   }
