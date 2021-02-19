@@ -203,7 +203,7 @@ main h1 {
   background: white;
   border-radius: 5px;
   overflow: hidden;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 .scrollbar-track {
@@ -346,5 +346,39 @@ main h1 {
 
 .todo-container ul .todo .container input:checked ~ .checkmark:after {
   display: block;
+}
+
+.page-numbers {
+  width: 500px;
+  max-width: 95%;
+  background: white;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem 0;
+}
+
+.page-numbers button {
+  margin-left: 1rem;
+  background: #b4b4b4;
+  color: white;
+  border: 0;
+  border-radius: 5px;
+  outline: 0;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+@media (hover: hover) {
+  .page-numbers button:hover {
+    -webkit-filter: brightness(1.1);
+            filter: brightness(1.1);
+  }
 }
 /*# sourceMappingURL=styles.css.map */

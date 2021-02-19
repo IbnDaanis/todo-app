@@ -46,13 +46,36 @@ const DOM_EVENTS = (() => {
   const searchTodos = document.querySelector('#search')
   const modalForDeletingTodo = document.querySelector('#modalForDeletingTodo')
   const deleteTodoButton = document.querySelector('#deleteTodo')
+  const pageNumbers = document.querySelector('#pageNumbers')
 
   const todoList = new TodoList()
+
+  let page = 0
 
   const dateToday = new Date().toISOString().split('T')[0]
 
   addTodoForm['dueDate'].value = dateToday
   addTodoForm['dueDate'].setAttribute('min', dateToday)
+
+  const addPageNumbers = () => {
+    for (let i = 0; i < todoList.getList().length / 20; i++) {
+      const button = document.createElement('button')
+      button.textContent = i + 1
+
+      button.onclick = () => {
+        page = i
+        addTodosToDOM()
+        setTimeout(() => {
+          scrollbar.scrollIntoView(todoContainer.firstElementChild, {
+            alignToTop: true,
+            offsetBottom: 0,
+          })
+        }, 100)
+      }
+
+      pageNumbers.appendChild(button)
+    }
+  }
 
   const _stringToHTML = (str, elementType) => {
     const fragment = elementType
@@ -129,10 +152,11 @@ const DOM_EVENTS = (() => {
   }
 
   const addTodosToDOM = (todos = todoList.getList()) => {
+    console.log(todos.slice(page * 20, page * 20 + 20))
     todoContainer.innerHTML = ''
     todos.length === 0 &&
       (todoContainer.innerHTML = '<h2>No todos to display</h2>')
-    todos.forEach(todo => {
+    todos.slice(page * 20, page * 20 + 20).forEach(todo => {
       todoContainer.appendChild(_todoElement(todo))
     })
   }
@@ -155,7 +179,7 @@ const DOM_EVENTS = (() => {
   }
 
   // for (let i = 0; i < 100; i++) {
-  //   list.addTodo(new Todo(i, false))
+  //   todoList.addTodo(new Todo(`Todo ${i}`, false))
   // }
 
   searchTodos.oninput = ({ target }) => {
@@ -164,7 +188,9 @@ const DOM_EVENTS = (() => {
 
   return {
     addTodosToDOM,
+    addPageNumbers,
   }
 })()
 
 DOM_EVENTS.addTodosToDOM()
+DOM_EVENTS.addPageNumbers()

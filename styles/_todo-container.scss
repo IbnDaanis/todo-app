@@ -5,7 +5,7 @@
   background: white;
   border-radius: 5px;
   overflow: hidden;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 }
 
 .scrollbar-track {
@@ -133,6 +133,35 @@
 
       .container input:checked ~ .checkmark:after {
         display: block;
+      }
+    }
+  }
+}
+
+.page-numbers {
+  width: 500px;
+  max-width: 95%;
+  background: white;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  display: flex;
+  padding: 1rem 0;
+  button {
+    margin-left: 1rem;
+    background: rgb(180, 180, 180);
+    color: white;
+    border: 0;
+    border-radius: 5px;
+    outline: 0;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: 0.2s ease-in-out;
+
+    @media (hover: hover) {
+      &:hover {
+        filter: brightness(1.1);
       }
     }
   }
