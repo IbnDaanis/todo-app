@@ -99,34 +99,85 @@ main h1 {
   border-radius: 5px;
 }
 
-.modal .container p {
+.modal .container .add-todo-form {
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.modal .container .add-todo-form input,
+.modal .container .add-todo-form select {
+  background: #fafbfc;
+  border: 1px solid #ebebeb;
+  padding: 0.5rem 1rem;
+  height: 40px;
+  border-radius: 5px;
+  width: 100%;
   font-size: 1rem;
+}
+
+.modal .container .add-todo-form input:focus,
+.modal .container .add-todo-form select:focus {
+  outline: none;
+  border: 1px solid #1e70eb;
+}
+
+.modal .container .add-todo-form .add-todo {
+  margin-bottom: 0.5rem;
+}
+
+.modal .container .add-todo-form .date-and-category {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.modal .container .add-todo-form .date-and-category input {
+  margin-right: 0.5rem;
+  min-width: 170px;
+}
+
+.modal .container .add-todo-form .date-and-category label {
+  margin-right: 0.5rem;
   font-weight: 500;
 }
 
-.modal .container button {
-  margin-left: 1rem;
-  width: 64px;
-  height: 32px;
-  border: none;
+.modal .container .add-todo-form .date-and-category select {
+  margin-right: 0.5rem;
+}
+
+.modal .container .add-todo-form .date-and-category .button {
+  width: 40px;
+}
+
+.modal .container .add-todo-form button {
+  display: block;
+  color: white;
+  background: #1e70eb;
+  border: 0;
   border-radius: 5px;
+  outline: 0;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
   font-weight: 500;
-  display: block;
   -webkit-transition: 0.2s ease-in-out;
   transition: 0.2s ease-in-out;
 }
 
 @media (hover: hover) {
-  .modal .container button:hover {
-    -webkit-filter: brightness(0.9);
-            filter: brightness(0.9);
+  .modal .container .add-todo-form button:hover {
+    -webkit-filter: brightness(1.1);
+            filter: brightness(1.1);
   }
-}
-
-.modal .container button.yes {
-  background: #e60c0c;
-  color: white;
 }
 
 .modal .container .add-todo-category-form {
@@ -175,7 +226,46 @@ main h1 {
   }
 }
 
-.add-todo-form {
+.modal .container .delete-todo-confirmation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modal .container .delete-todo-confirmation p {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.modal .container .delete-todo-confirmation button {
+  margin-left: 1rem;
+  width: 64px;
+  height: 32px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  display: block;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+@media (hover: hover) {
+  .modal .container .delete-todo-confirmation button:hover {
+    -webkit-filter: brightness(0.9);
+            filter: brightness(0.9);
+  }
+}
+
+.modal .container .delete-todo-confirmation button.yes {
+  background: #e60c0c;
+  color: white;
+}
+
+.add-todo-form-container {
   background: white;
   border-radius: 5px;
   width: 500px;
@@ -184,63 +274,8 @@ main h1 {
   padding: 1rem;
 }
 
-.add-todo-form input,
-.add-todo-form select {
-  background: #fafbfc;
-  border: 1px solid #ebebeb;
-  padding: 0.5rem 1rem;
-  height: 40px;
-  border-radius: 5px;
-  width: 100%;
-  font-size: 1rem;
-}
-
-.add-todo-form input:focus,
-.add-todo-form select:focus {
-  outline: none;
-  border: 1px solid #1e70eb;
-}
-
-.add-todo-form form {
-  margin-bottom: 1rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.add-todo-form form .add-todo {
-  margin-bottom: 0.5rem;
-}
-
-.add-todo-form form .date-and-category {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-bottom: 0.5rem;
-}
-
-.add-todo-form form .date-and-category input {
-  margin-right: 0.5rem;
-  min-width: 170px;
-}
-
-.add-todo-form form .date-and-category label {
-  margin-right: 0.5rem;
-  font-weight: 500;
-}
-
-.add-todo-form form .date-and-category select {
-  margin-right: 0.5rem;
-}
-
-.add-todo-form form button {
+.add-todo-form-container .open-add-todo-modal {
+  display: block;
   color: white;
   background: #1e70eb;
   border: 0;
@@ -251,26 +286,45 @@ main h1 {
   font-weight: 500;
   -webkit-transition: 0.2s ease-in-out;
   transition: 0.2s ease-in-out;
+  margin-bottom: 1rem;
 }
 
 @media (hover: hover) {
-  .add-todo-form form button:hover {
+  .add-todo-form-container .open-add-todo-modal:hover {
     -webkit-filter: brightness(1.1);
             filter: brightness(1.1);
   }
 }
 
-.add-todo-form .search-and-filter {
+.add-todo-form-container input,
+.add-todo-form-container select {
+  background: #fafbfc;
+  border: 1px solid #ebebeb;
+  padding: 0.5rem 1rem;
+  height: 40px;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.add-todo-form-container input:focus,
+.add-todo-form-container select:focus {
+  outline: none;
+  border: 1px solid #1e70eb;
+}
+
+.add-todo-form-container .search-and-filter {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.add-todo-form .search-and-filter input {
+.add-todo-form-container .search-and-filter input {
   margin-right: 0.5rem;
 }
 
-.add-todo-form .search-and-filter select {
+.add-todo-form-container .search-and-filter select {
   width: 200px;
 }
 

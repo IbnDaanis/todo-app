@@ -43,6 +43,8 @@ class TodoList {
 
 const DOM_EVENTS = (() => {
   const addTodoForm = document.querySelector('#addTodoForm')
+  const modalForAddingTodo = document.querySelector('#modalForAddingTodo')
+  const openAddTodoModal = document.querySelector('#openAddTodoModal')
   const todoContainer = document.querySelector('#todoContainer')
   const searchTodos = document.querySelector('#search')
   const modalForDeletingTodo = document.querySelector('#modalForDeletingTodo')
@@ -244,6 +246,19 @@ const DOM_EVENTS = (() => {
       : _addPageNumbers(todos.length)
   }
 
+  const createAddTodoForm = () => {
+    openAddTodoModal.onclick = () => {
+      _openModal(modalForAddingTodo)
+    }
+
+    document.body.addEventListener('click', ({ target }) => {
+      if (['addTodoSubmitButton', 'modalForAddingTodo'].includes(target.id)) {
+        _closeModal(modalForAddingTodo)
+        document.removeEventListener('click', _closeModal)
+      }
+    })
+  }
+
   const addTodoFormSubmit = () =>
     new Todo(
       addTodoForm['addTodo'].value,
@@ -262,6 +277,9 @@ const DOM_EVENTS = (() => {
         offsetBottom: 0,
       })
     }, 100)
+
+    _closeModal(modalForAddingTodo)
+
     addTodoForm.reset()
     addTodoForm['dueDate'].value = dateToday
   }
@@ -277,9 +295,11 @@ const DOM_EVENTS = (() => {
 
   return {
     addTodosToDOM,
+    createAddTodoForm,
     createCategoryOptions,
   }
 })()
 
 DOM_EVENTS.addTodosToDOM()
+DOM_EVENTS.createAddTodoForm()
 DOM_EVENTS.createCategoryOptions()

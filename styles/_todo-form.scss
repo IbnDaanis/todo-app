@@ -1,10 +1,30 @@
-.add-todo-form {
+.add-todo-form-container {
   background: white;
   border-radius: 5px;
   width: 500px;
   max-width: 95%;
   margin-bottom: 1rem;
   padding: 1rem;
+
+  .open-add-todo-modal {
+    display: block;
+    color: white;
+    background: rgb(30, 112, 235);
+    border: 0;
+    border-radius: 5px;
+    outline: 0;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: 0.2s ease-in-out;
+    margin-bottom: 1rem;
+
+    @media (hover: hover) {
+      &:hover {
+        filter: brightness(1.1);
+      }
+    }
+  }
 
   input,
   select {
@@ -15,58 +35,11 @@
     border-radius: 5px;
     width: 100%;
     font-size: 1rem;
+    cursor: pointer;
 
     &:focus {
       outline: none;
       border: 1px solid rgb(30, 112, 235);
-    }
-  }
-
-  form {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-
-    .add-todo {
-      margin-bottom: 0.5rem;
-    }
-
-    .date-and-category {
-      display: flex;
-      align-items: center;
-      margin-bottom: 0.5rem;
-
-      input {
-        margin-right: 0.5rem;
-        min-width: 170px;
-      }
-
-      label {
-        margin-right: 0.5rem;
-        font-weight: 500;
-      }
-
-      select {
-        margin-right: 0.5rem;
-      }
-    }
-
-    button {
-      color: white;
-      background: rgb(30, 112, 235);
-      border: 0;
-      border-radius: 5px;
-      outline: 0;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      font-weight: 500;
-      transition: 0.2s ease-in-out;
-
-      @media (hover: hover) {
-        &:hover {
-          filter: brightness(1.1);
-        }
-      }
     }
   }
 

@@ -21,31 +21,72 @@
     padding: 1rem;
     border-radius: 5px;
 
-    p {
-      font-size: 1rem;
-      font-weight: 500;
-    }
+    .add-todo-form {
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
 
-    button {
-      margin-left: 1rem;
-      width: 64px;
-      height: 32px;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      font-weight: 500;
-      display: block;
-      transition: 0.2s ease-in-out;
+      input,
+      select {
+        background: rgb(250, 251, 252);
+        border: 1px solid rgb(235, 235, 235);
+        padding: 0.5rem 1rem;
+        height: 40px;
+        border-radius: 5px;
+        width: 100%;
+        font-size: 1rem;
 
-      @media (hover: hover) {
-        &:hover {
-          filter: brightness(0.9);
+        &:focus {
+          outline: none;
+          border: 1px solid rgb(30, 112, 235);
         }
       }
 
-      &.yes {
-        background: rgb(230, 12, 12);
+      .add-todo {
+        margin-bottom: 0.5rem;
+      }
+
+      .date-and-category {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+
+        input {
+          margin-right: 0.5rem;
+          min-width: 170px;
+        }
+
+        label {
+          margin-right: 0.5rem;
+          font-weight: 500;
+        }
+
+        select {
+          margin-right: 0.5rem;
+        }
+
+        .button {
+          width: 40px;
+        }
+      }
+
+      button {
+        display: block;
         color: white;
+        background: rgb(30, 112, 235);
+        border: 0;
+        border-radius: 5px;
+        outline: 0;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: 0.2s ease-in-out;
+
+        @media (hover: hover) {
+          &:hover {
+            filter: brightness(1.1);
+          }
+        }
       }
     }
 
@@ -85,6 +126,39 @@
           &:hover {
             filter: brightness(1.1);
           }
+        }
+      }
+    }
+
+    .delete-todo-confirmation {
+      display: flex;
+      align-items: center;
+
+      p {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      button {
+        margin-left: 1rem;
+        width: 64px;
+        height: 32px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 500;
+        display: block;
+        transition: 0.2s ease-in-out;
+
+        @media (hover: hover) {
+          &:hover {
+            filter: brightness(0.9);
+          }
+        }
+
+        &.yes {
+          background: rgb(230, 12, 12);
+          color: white;
         }
       }
     }
