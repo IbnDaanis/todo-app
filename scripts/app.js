@@ -48,18 +48,78 @@ const DOM_EVENTS = (() => {
   const modalForDeletingTodo = document.querySelector('#modalForDeletingTodo')
   const deleteTodoButton = document.querySelector('#deleteTodo')
   const pageNumbers = document.querySelector('#pageNumbers')
+  const categorySelect = document.querySelector('#category')
+  const addTodoCategoryForm = document.querySelector('#addTodoCategoryForm')
+  const addTodoCategoryButton = document.querySelector('#addTodoCategoryButton')
+  const modalForTodoCategories = document.querySelector(
+    '#modalForTodoCategories'
+  )
 
   const todoList = new TodoList()
 
   let page = 0
+
+  console.log([
+    ...new Set(
+      todoList
+        .getList()
+        .filter(item => item.category)
+        .map(item => item.category)
+    ),
+  ])
+
+  const categories =
+    [
+      ...new Set(
+        todoList
+          .getList()
+          .filter(item => item.category)
+          .map(item => item.category)
+      ),
+    ] || []
 
   const dateToday = new Date().toISOString().split('T')[0]
 
   addTodoForm['dueDate'].value = dateToday
   addTodoForm['dueDate'].setAttribute('min', dateToday)
 
-  const addPageNumbers = () => {
-    for (let i = 0; i < todoList.getList().length / 20; i++) {
+  const _createCategories = isCategoryNew => {
+    console.log({ categories })
+    categorySelect.innerHTML = ''
+    categories.forEach(category => {
+      const option = document.createElement('option')
+      option.textContent = category
+      option.value = category
+      if (isCategoryNew && category === categories[categories.length - 1])
+        option.selected = true
+      categorySelect.appendChild(option)
+    })
+  }
+
+  const createCategoryOptions = () => {
+    addTodoCategoryButton.onclick = () => _openModal(modalForTodoCategories)
+
+    _createCategories(false)
+
+    addTodoCategoryForm.onsubmit = event => {
+      event.preventDefault()
+      categories.push(addTodoCategoryForm['categoryInput'].value.trim())
+      _createCategories(true)
+      addTodoCategoryForm.reset()
+    }
+
+    document.body.addEventListener('click', ({ target }) => {
+      if (['addTodoCategory', 'modalForTodoCategories'].includes(target.id)) {
+        _closeModal(modalForTodoCategories)
+        document.removeEventListener('click', _closeModal)
+      }
+    })
+  }
+
+  const addPageNumbers = (todos = todoList.getList().length) => {
+    pageNumbers.innerHTML = ''
+
+    for (let i = 0; i < todos / 20; i++) {
       const button = document.createElement('button')
       button.textContent = i + 1
 
@@ -88,28 +148,28 @@ const DOM_EVENTS = (() => {
     return fragment
   }
 
-  const _openModal = () => {
+  const _openModal = el => {
     document.body.style.overflow = 'hidden'
-    modalForDeletingTodo.style.display = 'flex'
+    el.style.display = 'flex'
     setTimeout(() => {
-      modalForDeletingTodo.style.opacity = '1'
+      el.style.opacity = '1'
     }, 0)
   }
 
-  const _closeModal = () => {
+  const _closeModal = el => {
     document.body.style.overflow = 'unset'
-    modalForDeletingTodo.style.opacity = '0'
+    el.style.opacity = '0'
     setTimeout(() => {
-      modalForDeletingTodo.style.display = 'none'
+      el.style.display = 'none'
     }, 300)
   }
 
   const _deleteTodoConfirmation = id => {
-    _openModal()
+    _openModal(modalForDeletingTodo)
 
     deleteTodoButton.onclick = () => {
       todoList.removeTodo(id)
-      _closeModal()
+      _closeModal(modalForDeletingTodo)
       searchTodos.value
         ? addTodosToDOM(todoList.filterList(searchTodos.value))
         : addTodosToDOM()
@@ -117,7 +177,7 @@ const DOM_EVENTS = (() => {
 
     document.body.addEventListener('click', ({ target }) => {
       if (['closeModal', 'modalForDeletingTodo'].includes(target.id)) {
-        _closeModal()
+        _closeModal(modalForDeletingTodo)
         document.removeEventListener('click', _closeModal)
       }
     })
@@ -152,22 +212,34 @@ const DOM_EVENTS = (() => {
     return element
   }
 
-  const addTodosToDOM = (todos = todoList.getList()) => {
+  const addTodosToDOM = (todos = todoList.getList(), filter = null) => {
     console.log(todos.slice(page * 20, page * 20 + 20))
+
+    const todosToDisplay = todos
+      .filter(todo => (filter ? todo.category === filter : true))
+      .slice(page * 20, page * 20 + 20)
+
     todoContainer.innerHTML = ''
-    todos.length === 0 &&
+
+    todosToDisplay.length === 0 &&
       (todoContainer.innerHTML = '<h2>No todos to display</h2>')
-    todos.slice(page * 20, page * 20 + 20).forEach(todo => {
+
+    todosToDisplay.forEach(todo => {
       todoContainer.appendChild(_todoElement(todo))
     })
   }
 
   const addTodoFormSubmit = () =>
-    new Todo(addTodoForm['addTodo'].value, addTodoForm['dueDate'].value)
+    new Todo(
+      addTodoForm['addTodo'].value,
+      addTodoForm['dueDate'].value,
+      addTodoForm['category'].value
+    )
 
   addTodoForm.onsubmit = event => {
     event.preventDefault()
     todoList.addTodo(addTodoFormSubmit())
+    page = todoList.getList().length / 20 - 1
     addTodosToDOM()
     setTimeout(() => {
       scrollbar.scrollIntoView(todoContainer.lastElementChild, {
@@ -185,13 +257,17 @@ const DOM_EVENTS = (() => {
 
   searchTodos.oninput = ({ target }) => {
     addTodosToDOM(todoList.filterList(target.value))
+    console.log(todoList.filterList(target.value).length)
+    addPageNumbers(todoList.filterList(target.value).length)
   }
 
   return {
     addTodosToDOM,
     addPageNumbers,
+    createCategoryOptions,
   }
 })()
 
 DOM_EVENTS.addTodosToDOM()
 DOM_EVENTS.addPageNumbers()
+DOM_EVENTS.createCategoryOptions()

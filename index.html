@@ -32,8 +32,19 @@
               required
             />
             <label for="category">Category:</label>
-            <select name="category" id="category"></select>
-            <button type="button">+</button>
+            <select
+              name="category"
+              id="category"
+              title="Add a Category"
+              required
+            ></select>
+            <button
+              type="button"
+              id="addTodoCategoryButton"
+              title="Add a Category"
+            >
+              +
+            </button>
           </div>
 
           <button type="submit">Add Todo</button>
@@ -53,6 +64,19 @@
       </div>
 
       <div class="page-numbers" id="pageNumbers"></div>
+
+      <div class="modal" id="modalForTodoCategories">
+        <div class="container">
+          <form id="addTodoCategoryForm" class="add-todo-category-form">
+            <input
+              type="text"
+              id="categoryInput"
+              placeholder="Enter Category"
+            />
+            <button id="addTodoCategory" class="add-todo-category">Add</button>
+          </form>
+        </div>
+      </div>
 
       <div class="modal" id="modalForDeletingTodo">
         <div class="container">

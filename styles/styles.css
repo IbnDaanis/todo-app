@@ -129,6 +129,52 @@ main h1 {
   color: white;
 }
 
+.modal .container .add-todo-category-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 300px;
+}
+
+.modal .container .add-todo-category-form input {
+  background: #fafbfc;
+  border: 1px solid #ebebeb;
+  padding: 0.5rem 1rem;
+  height: 40px;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.modal .container .add-todo-category-form input:focus {
+  outline: none;
+  border: 1px solid #1e70eb;
+}
+
+.modal .container .add-todo-category-form button {
+  color: white;
+  background: #1e70eb;
+  border: 0;
+  height: 40px;
+  border-radius: 5px;
+  outline: 0;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+@media (hover: hover) {
+  .modal .container .add-todo-category-form button:hover {
+    -webkit-filter: brightness(1.1);
+            filter: brightness(1.1);
+  }
+}
+
 .add-todo-form {
   background: white;
   border-radius: 5px;
