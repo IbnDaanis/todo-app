@@ -46,6 +46,7 @@
 
   .search-and-filter {
     display: flex;
+    margin-bottom: 1rem;
 
     input {
       margin-right: 0.5rem;
@@ -53,6 +54,16 @@
 
     select {
       width: 200px;
+    }
+  }
+
+  .sort-todos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    select {
+      width: 49%;
     }
   }
 }

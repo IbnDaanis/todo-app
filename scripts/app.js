@@ -52,6 +52,8 @@ const DOM_EVENTS = (() => {
   const pageNumbers = document.querySelector('#pageNumbers')
   const categorySelect = document.querySelector('#category')
   const categoryFilter = document.querySelector('#categoryFilter')
+  const sort = document.querySelector('#sort')
+  const sortMode = document.querySelector('#sortMode')
   const addTodoCategoryForm = document.querySelector('#addTodoCategoryForm')
   const addTodoCategoryButton = document.querySelector('#addTodoCategoryButton')
   const modalForTodoCategories = document.querySelector(
@@ -225,12 +227,48 @@ const DOM_EVENTS = (() => {
     return element
   }
 
+  const options = {
+    sorter: null,
+    direction: 'ascending',
+  }
+
   const addTodosToDOM = (todos = todoList.getList(), filter = null) => {
     console.log(todos.slice(page * 20, page * 20 + 20))
 
-    const todosToDisplay = todos
-      .filter(todo => (filter ? todo.category === filter : true))
-      .slice(page * 20, page * 20 + 20)
+    let todosToDisplay = todos.filter(todo =>
+      filter ? todo.category === filter : true
+    )
+
+    const { sorter, direction } = options
+    console.log('First: ', todosToDisplay)
+
+    if (sorter) {
+      console.log({ sorter, direction })
+
+      if (sorter === 'category') {
+        console.log('Category----------------')
+        console.log('Category thing: ', todosToDisplay)
+        todosToDisplay = todosToDisplay.sort((a, b) =>
+          a[sorter].localeCompare(b[sorter])
+        )
+      }
+
+      if (sorter === 'date') {
+        console.log('Date----------------')
+        todosToDisplay = todosToDisplay.sort((a, b) => {
+          return new Date(a.dueDate) - new Date(b.dueDate)
+        })
+      }
+
+      if (direction === 'descending') {
+        console.log('Date------------------')
+        todosToDisplay = todosToDisplay.sort().reverse()
+      }
+
+      todosToDisplay = todosToDisplay.slice(page * 20, page * 20 + 20)
+
+      console.log({ todosToDisplay })
+    }
 
     todoContainer.innerHTML = ''
 
@@ -284,6 +322,19 @@ const DOM_EVENTS = (() => {
     addTodoForm['dueDate'].value = dateToday
   }
 
+  const addTodoSorting = () => {
+    sort.onchange = () => {
+      console.log(sort.value)
+      options.sorter = sort.value
+      addTodosToDOM()
+    }
+
+    sortMode.onchange = () => {
+      options.direction = sortMode.value
+      addTodosToDOM()
+    }
+  }
+
   // for (let i = 0; i < 200; i++) {
   //   todoList.addTodo(new Todo(`Todo ${i}`, false))
   // }
@@ -295,11 +346,13 @@ const DOM_EVENTS = (() => {
 
   return {
     addTodosToDOM,
+    addTodoSorting,
     createAddTodoForm,
     createCategoryOptions,
   }
 })()
 
 DOM_EVENTS.addTodosToDOM()
+DOM_EVENTS.addTodoSorting()
 DOM_EVENTS.createAddTodoForm()
 DOM_EVENTS.createCategoryOptions()

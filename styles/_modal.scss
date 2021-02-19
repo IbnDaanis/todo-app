@@ -20,11 +20,14 @@
     align-items: center;
     padding: 1rem;
     border-radius: 5px;
+    width: 500px;
+    max-width: 95%;
 
     .add-todo-form {
       margin-bottom: 1rem;
       display: flex;
       flex-direction: column;
+      width: 100%;
 
       input,
       select {
@@ -93,7 +96,7 @@
     .add-todo-category-form {
       display: flex;
       align-items: center;
-      width: 300px;
+      width: 100%;
 
       input {
         background: rgb(250, 251, 252);
@@ -103,6 +106,7 @@
         border-radius: 5px;
         width: 100%;
         font-size: 1rem;
+        margin-right: 0.5rem;
 
         &:focus {
           outline: none;
@@ -133,14 +137,16 @@
     .delete-todo-confirmation {
       display: flex;
       align-items: center;
+      width: 100%;
 
       p {
         font-size: 1rem;
         font-weight: 500;
+        margin-right: 0.5rem;
       }
 
       button {
-        margin-left: 1rem;
+        margin-left: 0.5rem;
         width: 64px;
         height: 32px;
         border: none;
