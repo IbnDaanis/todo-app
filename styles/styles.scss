@@ -13,14 +13,14 @@
 
 html {
   scroll-behavior: smooth;
-  height: -webkit-fill-available;
+  height: stretch;
+  height: -moz-available;
 }
 
 body {
   background: rgb(62, 94, 190);
-  overflow: hidden;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
+  min-height: stretch;
+  min-height: -moz-available;
 }
 
 a {

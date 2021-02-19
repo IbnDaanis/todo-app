@@ -1,11 +1,24 @@
-.todo-container {
+.wrapper {
   width: 500px;
   max-width: 95%;
-  max-height: 40vh;
+  padding: 2px;
   background: white;
   border-radius: 5px;
   overflow: hidden;
   margin-bottom: 3rem;
+}
+
+.scrollbar-track {
+  background: none !important;
+}
+
+.todo-container {
+  touch-action: none;
+  -ms-touch-action: none;
+  max-height: 40vh;
+  background: white;
+
+  position: relative;
 
   h2 {
     text-align: center;
@@ -22,6 +35,7 @@
       align-items: center;
       padding: 0.5rem 1rem;
       transition: 0.2s ease-in-out;
+
       @media (hover: hover) {
         &:hover {
           background: #eee;

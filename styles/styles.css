@@ -14,13 +14,15 @@
 html {
   scroll-behavior: smooth;
   height: -webkit-fill-available;
+  height: stretch;
+  height: -moz-available;
 }
 
 body {
   background: #3e5ebe;
-  overflow: hidden;
-  min-height: 100vh;
   min-height: -webkit-fill-available;
+  min-height: stretch;
+  min-height: -moz-available;
 }
 
 a {
@@ -194,14 +196,26 @@ main h1 {
   }
 }
 
-.todo-container {
+.wrapper {
   width: 500px;
   max-width: 95%;
-  max-height: 40vh;
+  padding: 2px;
   background: white;
   border-radius: 5px;
   overflow: hidden;
   margin-bottom: 3rem;
+}
+
+.scrollbar-track {
+  background: none !important;
+}
+
+.todo-container {
+  touch-action: none;
+  -ms-touch-action: none;
+  max-height: 40vh;
+  background: white;
+  position: relative;
 }
 
 .todo-container h2 {
