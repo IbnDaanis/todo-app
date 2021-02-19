@@ -134,7 +134,7 @@ const DOM_EVENTS = (() => {
 
   const _addPageNumbers = (todos = todoList.getList().length) => {
     pageNumbers.innerHTML = ''
-
+    console.log({ todos })
     const length = todos || 1
 
     for (let i = 0; i < length / 20; i++) {
@@ -235,10 +235,7 @@ const DOM_EVENTS = (() => {
     direction: 'ascending',
   }
 
-  const addTodosToDOM = (
-    todos = query || todoList.getList(),
-    filter = null
-  ) => {
+  const addTodosToDOM = (todos = query || todoList.getList()) => {
     let todosToDisplay = todos.filter(todo =>
       category ? todo.category === category : true
     )
@@ -247,7 +244,6 @@ const DOM_EVENTS = (() => {
     console.log('First: ', todosToDisplay)
 
     if (sorter) {
-      page = 0
       console.log({ sorter, direction })
 
       if (sorter === 'category') {
@@ -269,24 +265,18 @@ const DOM_EVENTS = (() => {
         console.log('Date------------------')
         todosToDisplay = todosToDisplay.sort().reverse()
       }
-
-      console.log({ todosToDisplay })
     }
-
-    todosToDisplay = todosToDisplay.slice(page * 20, page * 20 + 20)
 
     todoContainer.innerHTML = ''
 
     todosToDisplay.length === 0 &&
       (todoContainer.innerHTML = '<h2>No todos to display</h2>')
 
-    todosToDisplay.forEach(todo => {
+    todosToDisplay.slice(page * 20, page * 20 + 20).forEach(todo => {
       todoContainer.appendChild(_todoElement(todo))
     })
 
-    filter
-      ? _addPageNumbers(todosToDisplay.length)
-      : _addPageNumbers(todos.length)
+    _addPageNumbers(todosToDisplay.length)
   }
 
   const createAddTodoForm = () => {
