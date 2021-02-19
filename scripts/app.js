@@ -289,8 +289,8 @@ const DOM_EVENTS = (() => {
   // }
 
   searchTodos.oninput = ({ target }) => {
+    page = 0
     addTodosToDOM(todoList.filterList(target.value))
-    console.log(todoList.filterList(target.value).length)
   }
 
   return {
