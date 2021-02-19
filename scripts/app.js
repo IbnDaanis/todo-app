@@ -80,28 +80,23 @@ const DOM_EVENTS = (() => {
     categorySelect.innerHTML = ''
     categoryFilter.innerHTML = ''
 
-    const filterMessage = document.createElement('option')
-    filterMessage.textContent = 'Filter by Category'
-    filterMessage.value = ''
+    const filterMessage = _stringToHTML(
+      `<option value="">Filter by Category</option>`
+    )
 
     categoryFilter.appendChild(filterMessage)
 
     categories.forEach(category => {
-      const option = document.createElement('option')
-      option.textContent = category
-      option.value = category
-
-      const option2 = document.createElement('option')
-      option2.textContent = category
-      option2.value = category
+      const option = _stringToHTML(
+        `<option value="${category}">${category}</option>`
+      )
+      const option2 = option.cloneNode(true)
 
       if (isCategoryNew && category === categories[categories.length - 1]) {
-        option.selected = true
-        option2.selected = true
+        option.firstElementChild.selected = true
       }
 
       categorySelect.appendChild(option)
-
       categoryFilter.appendChild(option2)
     })
   }
