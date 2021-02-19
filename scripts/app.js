@@ -63,6 +63,8 @@ const DOM_EVENTS = (() => {
   const todoList = new TodoList()
 
   let page = 0
+  let category = null
+  let query = null
 
   const categories =
     [
@@ -118,7 +120,8 @@ const DOM_EVENTS = (() => {
     }
 
     categoryFilter.onchange = ({ target }) => {
-      addTodosToDOM(todoList.getList(), target.value)
+      category = target.value
+      addTodosToDOM()
     }
 
     document.body.addEventListener('click', ({ target }) => {
@@ -232,11 +235,14 @@ const DOM_EVENTS = (() => {
     direction: 'ascending',
   }
 
-  const addTodosToDOM = (todos = todoList.getList(), filter = null) => {
+  const addTodosToDOM = (
+    todos = query || todoList.getList(),
+    filter = null
+  ) => {
     console.log(todos.slice(page * 20, page * 20 + 20))
 
     let todosToDisplay = todos.filter(todo =>
-      filter ? todo.category === filter : true
+      category ? todo.category === category : true
     )
 
     const { sorter, direction } = options
@@ -341,7 +347,10 @@ const DOM_EVENTS = (() => {
 
   searchTodos.oninput = ({ target }) => {
     page = 0
-    addTodosToDOM(todoList.filterList(target.value))
+
+    query = todoList.filterList(target.value)
+
+    addTodosToDOM()
   }
 
   return {
