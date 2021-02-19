@@ -22,14 +22,20 @@
             class="add-todo"
             required
           />
-          <input
-            type="date"
-            name="dueDate"
-            id="dueDate"
-            title="Add a due date"
-            class="due-date"
-            required
-          />
+          <div class="date-and-category">
+            <input
+              type="date"
+              name="dueDate"
+              id="dueDate"
+              title="Add a due date"
+              class="due-date"
+              required
+            />
+            <label for="category">Category:</label>
+            <select name="category" id="category"></select>
+            <button type="button">+</button>
+          </div>
+
           <button type="submit">Add Todo</button>
         </form>
         <input

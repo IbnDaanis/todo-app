@@ -1,8 +1,9 @@
 class Todo {
-  constructor(title, dueDate) {
+  constructor(title, dueDate, category) {
     this.title = title
     this.isCompleted = false
     this.dueDate = dueDate
+    this.category = category
     this.id = Math.random().toString(36).substr(2, 9)
   }
 }
