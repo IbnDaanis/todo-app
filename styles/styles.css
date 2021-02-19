@@ -13,10 +13,20 @@
 
 html {
   scroll-behavior: smooth;
+  height: -webkit-fill-available;
 }
 
 body {
+  background: #3e5ebe;
   overflow: hidden;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+@media (max-height: 800px) {
+  body {
+    overflow: unset;
+  }
 }
 
 a {
@@ -28,10 +38,6 @@ button {
   outline: none;
   cursor: pointer;
   display: block;
-}
-
-body {
-  background: #3e5ebe;
 }
 
 main {
@@ -52,6 +58,13 @@ main h1 {
   font-size: 4em;
   margin: 2rem 0;
   color: white;
+}
+
+@media (max-height: 800px) {
+  main h1 {
+    margin: 1rem 0;
+    font-size: 3rem;
+  }
 }
 
 main .add-todo-form {
@@ -127,10 +140,11 @@ main .add-todo-form form button {
 main .todo-container {
   width: 500px;
   max-width: 95%;
-  max-height: 400px;
+  max-height: 40vh;
   background: white;
   border-radius: 5px;
   overflow: hidden;
+  margin-bottom: 3rem;
 }
 
 main .todo-container h2 {

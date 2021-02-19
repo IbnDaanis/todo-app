@@ -48,7 +48,9 @@ const DOM_EVENTS = (() => {
   const modalForDeletingTodo = document.querySelector('#modalForDeletingTodo')
   const deleteTodoButton = document.querySelector('#deleteTodo')
 
-  addTodoForm['dueDate'].value = dateFns.format(new Date(), 'YYYY-MM-DD')
+  const dateToday = new Date().toISOString().split('T')[0]
+
+  addTodoForm['dueDate'].value = dateToday
 
   const _stringToHTML = (str, elementType) => {
     const fragment = elementType
@@ -148,7 +150,7 @@ const DOM_EVENTS = (() => {
       })
     }, 100)
     addTodoForm.reset()
-    addTodoForm['dueDate'].value = dateFns.format(new Date(), 'YYYY-MM-DD')
+    addTodoForm['dueDate'].value = dateToday
   }
 
   // for (let i = 0; i < 100; i++) {
