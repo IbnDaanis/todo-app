@@ -41,16 +41,18 @@ class TodoList {
 }
 
 const DOM_EVENTS = (() => {
-  const list = new TodoList()
   const addTodoForm = document.querySelector('#addTodoForm')
   const todoContainer = document.querySelector('#todoContainer')
   const searchTodos = document.querySelector('#search')
   const modalForDeletingTodo = document.querySelector('#modalForDeletingTodo')
   const deleteTodoButton = document.querySelector('#deleteTodo')
 
+  const todoList = new TodoList()
+
   const dateToday = new Date().toISOString().split('T')[0]
 
   addTodoForm['dueDate'].value = dateToday
+  addTodoForm['dueDate'].setAttribute('min', dateToday)
 
   const _stringToHTML = (str, elementType) => {
     const fragment = elementType
@@ -82,10 +84,10 @@ const DOM_EVENTS = (() => {
     _openModal()
 
     deleteTodoButton.onclick = () => {
-      list.removeTodo(id)
+      todoList.removeTodo(id)
       _closeModal()
       searchTodos.value
-        ? addTodosToDOM(list.filterList(searchTodos.value))
+        ? addTodosToDOM(todoList.filterList(searchTodos.value))
         : addTodosToDOM()
     }
 
@@ -113,9 +115,9 @@ const DOM_EVENTS = (() => {
     )
 
     element.querySelector(`#isComplete${todo.id}`).onclick = () => {
-      list.editTodo(todo.id, { isCompleted: !todo.isCompleted })
+      todoList.editTodo(todo.id, { isCompleted: !todo.isCompleted })
       searchTodos.value
-        ? addTodosToDOM(list.filterList(searchTodos.value))
+        ? addTodosToDOM(todoList.filterList(searchTodos.value))
         : addTodosToDOM()
     }
 
@@ -126,7 +128,7 @@ const DOM_EVENTS = (() => {
     return element
   }
 
-  const addTodosToDOM = (todos = list.getList()) => {
+  const addTodosToDOM = (todos = todoList.getList()) => {
     todoContainer.innerHTML = ''
     todos.length === 0 &&
       (todoContainer.innerHTML = '<h2>No todos to display</h2>')
@@ -135,13 +137,12 @@ const DOM_EVENTS = (() => {
     })
   }
 
-  const addTodoFormSubmit = () => {
-    return new Todo(addTodoForm['addTodo'].value, addTodoForm['dueDate'].value)
-  }
+  const addTodoFormSubmit = () =>
+    new Todo(addTodoForm['addTodo'].value, addTodoForm['dueDate'].value)
 
   addTodoForm.onsubmit = event => {
     event.preventDefault()
-    list.addTodo(addTodoFormSubmit())
+    todoList.addTodo(addTodoFormSubmit())
     addTodosToDOM()
     setTimeout(() => {
       scrollbar.scrollIntoView(todoContainer.lastElementChild, {
@@ -158,7 +159,7 @@ const DOM_EVENTS = (() => {
   // }
 
   searchTodos.oninput = ({ target }) => {
-    addTodosToDOM(list.filterList(target.value))
+    addTodosToDOM(todoList.filterList(target.value))
   }
 
   return {
