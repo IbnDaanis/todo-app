@@ -82,7 +82,6 @@ const DOM_EVENTS = (() => {
   addTodoForm['dueDate'].setAttribute('min', dateToday)
 
   const _createCategories = isCategoryNew => {
-    console.log({ categories })
     categorySelect.innerHTML = ''
     categoryFilter.innerHTML = ''
 
@@ -91,6 +90,13 @@ const DOM_EVENTS = (() => {
     )
 
     categoryFilter.appendChild(filterMessage)
+
+    categories.length < 1 &&
+      categorySelect.appendChild(
+        _stringToHTML(
+          `<option value="">Add a category on the right =></option>`
+        )
+      )
 
     categories.forEach(category => {
       const option = _stringToHTML(
@@ -134,7 +140,6 @@ const DOM_EVENTS = (() => {
 
   const _addPageNumbers = (todos = todoList.getList().length) => {
     pageNumbers.innerHTML = ''
-    console.log({ todos })
     const length = todos || 1
 
     for (let i = 0; i < length / 20; i++) {
@@ -155,7 +160,6 @@ const DOM_EVENTS = (() => {
         }, 100)
 
         setTimeout(() => {
-          console.log(page * 60)
           scrollbarPages.scrollLeft = page * 27
         }, 100)
       }
@@ -257,28 +261,21 @@ const DOM_EVENTS = (() => {
     )
 
     const { sorter, direction } = options
-    console.log('First: ', todosToDisplay)
 
     if (sorter) {
-      console.log({ sorter, direction })
-
       if (sorter === 'category') {
-        console.log('Category----------------')
-        console.log('Category thing: ', todosToDisplay)
         todosToDisplay = todosToDisplay.sort((a, b) =>
           a[sorter].localeCompare(b[sorter])
         )
       }
 
       if (sorter === 'date') {
-        console.log('Date----------------')
-        todosToDisplay = todosToDisplay.sort((a, b) => {
-          return new Date(a.dueDate) - new Date(b.dueDate)
-        })
+        todosToDisplay = todosToDisplay.sort(
+          (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+        )
       }
 
       if (direction === 'descending') {
-        console.log('Date------------------')
         todosToDisplay = todosToDisplay.sort().reverse()
       }
     }
