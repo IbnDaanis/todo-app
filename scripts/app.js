@@ -156,6 +156,11 @@ const DOM_EVENTS = (() => {
             offsetBottom: 0,
           })
         }, 100)
+
+        setTimeout(() => {
+          console.log(page * 60)
+          scrollbarPages.scrollLeft = page * 27
+        }, 100)
       }
 
       pageNumbers.appendChild(button)
