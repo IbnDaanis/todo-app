@@ -102,7 +102,6 @@ main h1 {
 }
 
 .modal .container .add-todo-form {
-  margin-bottom: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -130,11 +129,13 @@ main h1 {
   border: 1px solid #1e70eb;
 }
 
-.modal .container .add-todo-form .add-todo {
-  margin-bottom: 0.5rem;
+.modal .container .add-todo-form label {
+  font-weight: 500;
+  margin-right: 0.5rem;
+  min-width: 89px;
 }
 
-.modal .container .add-todo-form .date-and-category {
+.modal .container .add-todo-form .add-todo {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -144,31 +145,43 @@ main h1 {
   margin-bottom: 0.5rem;
 }
 
-@media (max-width: 600px) {
-  .modal .container .add-todo-form .date-and-category {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-  }
+.modal .container .add-todo-form .date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 0.5rem;
 }
 
-.modal .container .add-todo-form .date-and-category input {
+.modal .container .add-todo-form .category {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.modal .container .add-todo-form .category label {
   margin-right: 0.5rem;
-  min-width: 170px;
 }
 
-.modal .container .add-todo-form .date-and-category label {
-  margin-right: 0.5rem;
-  font-weight: 500;
-}
-
-.modal .container .add-todo-form .date-and-category select {
+.modal .container .add-todo-form .category select {
   margin-right: 0.5rem;
 }
 
-.modal .container .add-todo-form .date-and-category .button {
+.modal .container .add-todo-form .category button {
+  display: block;
   width: 40px;
+  height: 40px;
+  font-weight: 700;
 }
 
 .modal .container .add-todo-form button {

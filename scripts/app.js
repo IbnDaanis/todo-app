@@ -141,6 +141,7 @@ const DOM_EVENTS = (() => {
     for (let i = 0; i < length / 20; i++) {
       const button = document.createElement('button')
       button.textContent = i + 1
+      console.log({ i, page })
       if (i === page) {
         button.style.background = '#1e70eb'
       }
@@ -307,7 +308,8 @@ const DOM_EVENTS = (() => {
   addTodoForm.onsubmit = event => {
     event.preventDefault()
     todoList.addTodo(addTodoFormSubmit())
-    page = todoList.getList().length / 20 - 1
+    query = null
+    page = Math.ceil(todoList.getList().length / 20) - 1
     addTodosToDOM()
     setTimeout(() => {
       scrollbar.scrollIntoView(todoContainer.lastElementChild, {

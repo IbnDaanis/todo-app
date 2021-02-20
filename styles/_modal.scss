@@ -24,7 +24,6 @@
     max-width: 95%;
 
     .add-todo-form {
-      margin-bottom: 1rem;
       display: flex;
       flex-direction: column;
       width: 100%;
@@ -45,35 +44,44 @@
         }
       }
 
-      .add-todo {
-        margin-bottom: 0.5rem;
+      label {
+        font-weight: 500;
+        margin-right: 0.5rem;
+        min-width: 89px;
       }
 
-      .date-and-category {
+      .add-todo {
         display: flex;
         align-items: center;
         margin-bottom: 0.5rem;
+      }
 
-        @media (max-width: 600px) {
-          flex-direction: column;
-        }
+      .date {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
 
-        input {
-          margin-right: 0.5rem;
-          min-width: 170px;
-        }
+      .category {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
 
         label {
           margin-right: 0.5rem;
-          font-weight: 500;
         }
 
         select {
           margin-right: 0.5rem;
         }
 
-        .button {
+        button {
+          display: block;
           width: 40px;
+          height: 40px;
+          font-weight: 700;
         }
       }
 
