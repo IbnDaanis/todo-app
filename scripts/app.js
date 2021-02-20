@@ -142,12 +142,13 @@ const DOM_EVENTS = (() => {
       const button = document.createElement('button')
       button.textContent = i + 1
       if (i === page) {
-        button.style.background = 'red'
+        button.style.background = '#1e70eb'
       }
 
       button.onclick = () => {
         page = i
         addTodosToDOM()
+
         setTimeout(() => {
           scrollbar.scrollIntoView(todoContainer.firstElementChild, {
             alignToTop: true,

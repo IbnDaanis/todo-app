@@ -144,6 +144,15 @@ main h1 {
   margin-bottom: 0.5rem;
 }
 
+@media (max-width: 600px) {
+  .modal .container .add-todo-form .date-and-category {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 .modal .container .add-todo-form .date-and-category input {
   margin-right: 0.5rem;
   min-width: 170px;
@@ -527,7 +536,7 @@ main h1 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 1rem 0.5rem 1.5rem;
+  padding: 1rem 0 1.5rem;
 }
 
 .pages-scrollbar .page-numbers button {
