@@ -536,6 +536,10 @@ main h1 {
   padding: 2px;
 }
 
+.pages-scrollbar .scrollbar-track {
+  background: none !important;
+}
+
 .pages-scrollbar .page-numbers {
   width: 500px;
   max-width: 100%;

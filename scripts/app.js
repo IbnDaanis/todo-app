@@ -334,6 +334,7 @@ const DOM_EVENTS = (() => {
     sort.onchange = () => {
       options.sorter = sort.value
       page = 0
+      sort.value ? (sortMode.disabled = false) : (sortMode.disabled = true)
       addTodosToDOM()
     }
 
@@ -372,7 +373,3 @@ DOM_EVENTS.addTodosToDOM()
 DOM_EVENTS.addTodoSorting()
 DOM_EVENTS.createAddTodoForm()
 DOM_EVENTS.createCategoryOptions()
-
-document.addEventListener('click', e => {
-  console.log(e)
-})

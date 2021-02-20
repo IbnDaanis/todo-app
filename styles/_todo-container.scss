@@ -146,6 +146,10 @@
   overflow: hidden;
   padding: 2px;
 
+  .scrollbar-track {
+    background: none !important;
+  }
+
   .page-numbers {
     width: 500px;
     max-width: 100%;
