@@ -125,12 +125,11 @@ const DOM_EVENTS = (() => {
       addTodosToDOM()
     }
 
-    document.body.addEventListener('click', ({ target }) => {
-      if (['addTodoCategory', 'modalForTodoCategories'].includes(target.id)) {
-        _closeModal(modalForTodoCategories)
-        document.removeEventListener('click', _closeModal)
-      }
-    })
+    _closeModalEventListener(
+      'addTodoCategory',
+      'modalForTodoCategories',
+      modalForTodoCategories
+    )
   }
 
   const _addPageNumbers = (todos = todoList.getList().length) => {
@@ -142,9 +141,7 @@ const DOM_EVENTS = (() => {
       const button = document.createElement('button')
       button.textContent = i + 1
 
-      if (i === page) {
-        button.style.background = '#1e70eb'
-      }
+      i === page && (button.style.background = '#1e70eb')
 
       button.onclick = () => {
         page = i
@@ -193,6 +190,15 @@ const DOM_EVENTS = (() => {
     }, 300)
   }
 
+  const _closeModalEventListener = (target1, target2, modal) => {
+    document.body.addEventListener('click', ({ target }) => {
+      if ([target1, target2].includes(target.id)) {
+        _closeModal(modal)
+        document.removeEventListener('click', _closeModal)
+      }
+    })
+  }
+
   const _deleteTodoConfirmation = id => {
     _openModal(modalForDeletingTodo)
 
@@ -204,12 +210,11 @@ const DOM_EVENTS = (() => {
         : addTodosToDOM()
     }
 
-    document.body.addEventListener('click', ({ target }) => {
-      if (['closeModal', 'modalForDeletingTodo'].includes(target.id)) {
-        _closeModal(modalForDeletingTodo)
-        document.removeEventListener('click', _closeModal)
-      }
-    })
+    _closeModalEventListener(
+      'closeModal',
+      'modalForDeletingTodo',
+      modalForDeletingTodo
+    )
   }
 
   const _todoElement = todo => {
@@ -291,16 +296,8 @@ const DOM_EVENTS = (() => {
   }
 
   const createAddTodoForm = () => {
-    openAddTodoModal.onclick = () => {
-      _openModal(modalForAddingTodo)
-    }
-
-    document.body.addEventListener('click', ({ target }) => {
-      if (['addTodoSubmitButton', 'modalForAddingTodo'].includes(target.id)) {
-        _closeModal(modalForAddingTodo)
-        document.removeEventListener('click', _closeModal)
-      }
-    })
+    openAddTodoModal.onclick = () => _openModal(modalForAddingTodo)
+    _closeModalEventListener(null, 'modalForAddingTodo', modalForAddingTodo)
   }
 
   const addTodoFormSubmit = () =>
