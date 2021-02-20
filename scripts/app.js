@@ -141,7 +141,7 @@ const DOM_EVENTS = (() => {
     for (let i = 0; i < length / 20; i++) {
       const button = document.createElement('button')
       button.textContent = i + 1
-      console.log({ i, page })
+
       if (i === page) {
         button.style.background = '#1e70eb'
       }
@@ -343,7 +343,7 @@ const DOM_EVENTS = (() => {
   // }
 
   // for (let i = 0; i < 100; i++) {
-  //   todoList.addTodo(new Todo(`Todo Second ${i}`, false, 'Second'))
+  //   todoList.addTodo(new Todo(`Todo Third ${i}`, false, 'Third'))
   // }
 
   searchTodos.oninput = ({ target }) => {
