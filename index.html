@@ -6,6 +6,13 @@
     <meta name="description" content="Todo App" />
     <link rel="stylesheet" href="./styles/styles.css" />
     <link rel="icon" type="image/png" href="./images/favicon.png" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/8.6.0/smooth-scrollbar.min.js"
+      integrity="sha512-/i9hnD/QS+oyspghC8CLAzA9eh+GKAAXhpdakrfsfk9Q1qJel3cR8cWYhPNe6sdExCd9lu1tIxOFECwD0WlU7A=="
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <script src="./scripts/app.js" defer></script>
     <title>Todo App</title>
   </head>
   <body>
@@ -124,33 +131,5 @@
         </div>
       </div>
     </main>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scrollbar/8.6.0/smooth-scrollbar.min.js"
-      integrity="sha512-/i9hnD/QS+oyspghC8CLAzA9eh+GKAAXhpdakrfsfk9Q1qJel3cR8cWYhPNe6sdExCd9lu1tIxOFECwD0WlU7A=="
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      const scrollbar = Scrollbar.init(
-        document.querySelector('#my-scrollbar'),
-        {
-          damping: 0.1,
-          renderByPixels: true,
-          continuousScrolling: true,
-          alwaysShowTracks: true,
-        }
-      )
-
-      const scrollbarPages = Scrollbar.init(
-        document.querySelector('#pagesScrollbar'),
-        {
-          damping: 0.1,
-          renderByPixels: true,
-          continuousScrolling: true,
-          alwaysShowTracks: true,
-        }
-      )
-    </script>
-    <script src="./scripts/app.js"></script>
   </body>
 </html>

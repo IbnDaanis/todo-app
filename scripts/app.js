@@ -41,6 +41,23 @@ class TodoList {
   }
 }
 
+const scrollbar = Scrollbar.init(document.querySelector('#my-scrollbar'), {
+  damping: 0.1,
+  renderByPixels: true,
+  continuousScrolling: true,
+  alwaysShowTracks: true,
+})
+
+const scrollbarPages = Scrollbar.init(
+  document.querySelector('#pagesScrollbar'),
+  {
+    damping: 0.1,
+    renderByPixels: true,
+    continuousScrolling: true,
+    alwaysShowTracks: true,
+  }
+)
+
 const DOM_EVENTS = (() => {
   const addTodoForm = document.querySelector('#addTodoForm')
   const modalForAddingTodo = document.querySelector('#modalForAddingTodo')
@@ -77,96 +94,8 @@ const DOM_EVENTS = (() => {
     ] || []
 
   const dateToday = new Date().toISOString().split('T')[0]
-
   addTodoForm['dueDate'].value = dateToday
   addTodoForm['dueDate'].setAttribute('min', dateToday)
-
-  const _createCategories = isCategoryNew => {
-    categorySelect.innerHTML = ''
-    categoryFilter.innerHTML = ''
-
-    const filterMessage = _stringToHTML(
-      `<option value="">Filter by Category</option>`
-    )
-
-    categoryFilter.appendChild(filterMessage)
-
-    categories.length < 1 &&
-      categorySelect.appendChild(
-        _stringToHTML(
-          `<option value="">Add a category on the right =></option>`
-        )
-      )
-
-    categories.forEach(category => {
-      const option = _stringToHTML(
-        `<option value="${category}">${category}</option>`
-      )
-      const option2 = option.cloneNode(true)
-
-      if (isCategoryNew && category === categories[categories.length - 1]) {
-        option.firstElementChild.selected = true
-      }
-
-      categorySelect.appendChild(option)
-      categoryFilter.appendChild(option2)
-    })
-  }
-
-  const createCategoryOptions = () => {
-    addTodoCategoryButton.onclick = () => _openModal(modalForTodoCategories)
-
-    _createCategories(false)
-
-    addTodoCategoryForm.onsubmit = event => {
-      event.preventDefault()
-      categories.push(addTodoCategoryForm['categoryInput'].value.trim())
-      _createCategories(true)
-      addTodoCategoryForm.reset()
-    }
-
-    categoryFilter.onchange = ({ target }) => {
-      category = target.value
-      page = 0
-      addTodosToDOM()
-    }
-
-    _closeModalEventListener(
-      'addTodoCategory',
-      'modalForTodoCategories',
-      modalForTodoCategories
-    )
-  }
-
-  const _addPageNumbers = (todos = todoList.getList().length) => {
-    pageNumbers.innerHTML = ''
-    const length = todos || 1
-
-    for (let i = 0; i < length / 20; i++) {
-      const button = document.createElement('button')
-      button.textContent = i + 1
-
-      i === page && (button.style.background = '#1e70eb')
-
-      button.onclick = () => {
-        page = i
-        addTodosToDOM()
-
-        setTimeout(() => {
-          scrollbar.scrollIntoView(todoContainer.firstElementChild, {
-            alignToTop: true,
-            offsetBottom: 0,
-          })
-        }, 100)
-
-        setTimeout(() => {
-          scrollbarPages.scrollLeft = page * 27
-        }, 100)
-      }
-
-      pageNumbers.appendChild(button)
-    }
-  }
 
   const _stringToHTML = (str, elementType) => {
     const fragment = elementType
@@ -201,6 +130,36 @@ const DOM_EVENTS = (() => {
         document.removeEventListener('click', _closeModal)
       }
     })
+  }
+
+  const _addPageNumbers = (todos = todoList.getList().length) => {
+    pageNumbers.innerHTML = ''
+    const length = todos || 1
+
+    for (let i = 0; i < length / 20; i++) {
+      const button = document.createElement('button')
+      button.textContent = i + 1
+
+      i === page && (button.style.background = '#1e70eb')
+
+      button.onclick = () => {
+        page = i
+        addTodosToDOM()
+
+        setTimeout(() => {
+          scrollbar.scrollIntoView(todoContainer.firstElementChild, {
+            alignToTop: true,
+            offsetBottom: 0,
+          })
+        }, 100)
+
+        setTimeout(() => {
+          scrollbarPages.scrollLeft = page * 27
+        }, 100)
+      }
+
+      pageNumbers.appendChild(button)
+    }
   }
 
   const _deleteTodoConfirmation = id => {
@@ -250,45 +209,92 @@ const DOM_EVENTS = (() => {
     return element
   }
 
+  const _createCategories = isCategoryNew => {
+    categorySelect.innerHTML = ''
+    categoryFilter.innerHTML = ''
+
+    const filterMessage = _stringToHTML(
+      `<option value="">Filter by Category</option>`
+    )
+
+    categoryFilter.appendChild(filterMessage)
+
+    categories.length < 1 &&
+      categorySelect.appendChild(
+        _stringToHTML(
+          `<option value="">Add a category on the right =></option>`
+        )
+      )
+
+    categories.forEach(category => {
+      const option = _stringToHTML(
+        `<option value="${category}">${category}</option>`
+      )
+      const option2 = option.cloneNode(true)
+
+      isCategoryNew &&
+        category === categories[categories.length - 1] &&
+        (option.firstElementChild.selected = true)
+
+      categorySelect.appendChild(option)
+      categoryFilter.appendChild(option2)
+    })
+  }
+
+  const createCategoryOptions = () => {
+    addTodoCategoryButton.onclick = () => _openModal(modalForTodoCategories)
+
+    _createCategories(false)
+
+    addTodoCategoryForm.onsubmit = event => {
+      event.preventDefault()
+      categories.push(addTodoCategoryForm['categoryInput'].value.trim())
+      _createCategories(true)
+      addTodoCategoryForm.reset()
+    }
+
+    categoryFilter.onchange = ({ target }) => {
+      category = target.value
+      page = 0
+      addTodosToDOM()
+    }
+
+    _closeModalEventListener(
+      'addTodoCategory',
+      'modalForTodoCategories',
+      modalForTodoCategories
+    )
+  }
+
   const options = {
     sorter: null,
     direction: 'ascending',
   }
 
   const addTodosToDOM = (todos = query || todoList.getList()) => {
-    let todosToDisplay = todos.filter(todo =>
+    const todosToDisplay = todos.filter(todo =>
       category ? todo.category === category : true
     )
 
     const { sorter, direction } = options
-
     if (sorter) {
-      if (sorter === 'category') {
-        todosToDisplay = todosToDisplay.sort((a, b) =>
-          a[sorter].localeCompare(b[sorter])
-        )
+      switch (sorter) {
+        case 'category':
+          todosToDisplay.sort((a, b) => a[sorter].localeCompare(b[sorter]))
+        case 'date':
+          todosToDisplay.sort(
+            (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
+          )
       }
-
-      if (sorter === 'date') {
-        todosToDisplay = todosToDisplay.sort(
-          (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
-        )
-      }
-
-      if (direction === 'descending') {
-        todosToDisplay = todosToDisplay.sort().reverse()
-      }
+      direction === 'descending' && todosToDisplay.sort().reverse()
     }
 
     todoContainer.innerHTML = ''
-
     todosToDisplay.length === 0 &&
       (todoContainer.innerHTML = '<h2>No todos to display</h2>')
-
-    todosToDisplay.slice(page * 20, page * 20 + 20).forEach(todo => {
-      todoContainer.appendChild(_todoElement(todo))
-    })
-
+    todosToDisplay
+      .slice(page * 20, page * 20 + 20)
+      .forEach(todo => todoContainer.appendChild(_todoElement(todo)))
     _addPageNumbers(todosToDisplay.length)
   }
 
@@ -318,28 +324,28 @@ const DOM_EVENTS = (() => {
     }, 100)
 
     setTimeout(() => {
-      scrollbarPages.scrollLeft = page * 48
+      scrollbarPages.scrollLeft = page * 27
     }, 100)
 
     _closeModal(modalForAddingTodo)
 
-    addTodoForm.reset()
-    addTodoForm['dueDate'].value = dateToday
+    setTimeout(() => {
+      addTodoForm.reset()
+      addTodoForm['dueDate'].value = dateToday
+    }, 301)
   }
 
   const addTodoSorting = () => {
-    sort.onchange = () => {
-      options.sorter = sort.value
+    const handleChange = () => {
       page = 0
+      options.sorter = sort.value
+      options.direction = sortMode.value
       sort.value ? (sortMode.disabled = false) : (sortMode.disabled = true)
       addTodosToDOM()
     }
 
-    sortMode.onchange = () => {
-      options.direction = sortMode.value
-      page = 0
-      addTodosToDOM()
-    }
+    sort.onchange = () => handleChange()
+    sortMode.onchange = () => handleChange()
   }
 
   // for (let i = 0; i < 100; i++) {
@@ -352,9 +358,7 @@ const DOM_EVENTS = (() => {
 
   searchTodos.oninput = ({ target }) => {
     page = 0
-
     query = todoList.filterList(target.value)
-
     addTodosToDOM()
   }
 
