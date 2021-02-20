@@ -143,7 +143,7 @@ const DOM_EVENTS = (() => {
         }</button>`
       )
 
-      pageButton.onclick = () => {
+      pageButton.firstElementChild.onclick = () => {
         page = i
         addTodosToDOM()
 
