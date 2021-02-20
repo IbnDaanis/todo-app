@@ -318,6 +318,10 @@ const DOM_EVENTS = (() => {
       })
     }, 100)
 
+    setTimeout(() => {
+      scrollbarPages.scrollLeft = page * 48
+    }, 100)
+
     _closeModal(modalForAddingTodo)
 
     addTodoForm.reset()
@@ -366,3 +370,7 @@ DOM_EVENTS.addTodosToDOM()
 DOM_EVENTS.addTodoSorting()
 DOM_EVENTS.createAddTodoForm()
 DOM_EVENTS.createCategoryOptions()
+
+document.addEventListener('click', e => {
+  console.log(e)
+})
