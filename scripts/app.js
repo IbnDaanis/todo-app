@@ -137,12 +137,13 @@ const DOM_EVENTS = (() => {
     const length = todos || 1
 
     for (let i = 0; i < length / 20; i++) {
-      const button = document.createElement('button')
-      button.textContent = i + 1
+      const pageButton = _stringToHTML(
+        `<button ${i === page && "style='background: #1e70eb'"}>${
+          i + 1
+        }</button>`
+      )
 
-      i === page && (button.style.background = '#1e70eb')
-
-      button.onclick = () => {
+      pageButton.onclick = () => {
         page = i
         addTodosToDOM()
 
@@ -158,7 +159,7 @@ const DOM_EVENTS = (() => {
         }, 100)
       }
 
-      pageNumbers.appendChild(button)
+      pageNumbers.appendChild(pageButton)
     }
   }
 
@@ -180,6 +181,41 @@ const DOM_EVENTS = (() => {
     )
   }
 
+  const _todoModal = todo => {
+    const modalForTodo = document.querySelector('#modalForTodo')
+    const editTodoForm = document.querySelector('#editTodoForm')
+    const todoTitle = document.querySelector('#todoTitle')
+    const todoDueDate = document.querySelector('#todoDueDate')
+    const isTodoComplete = document.querySelector('#isTodoComplete')
+    const categoryEdit = document.querySelector('#categoryEdit')
+
+    todoTitle.value = todo.title
+    todoDueDate.value = todo.dueDate
+    isTodoComplete.checked = todo.isCompleted
+
+    isTodoComplete.onchange = () => {
+      todoList.editTodo(todo.id, { isCompleted: isTodoComplete.checked })
+    }
+
+    editTodoForm.onsubmit = event => {
+      event.preventDefault()
+      todoList.editTodo(todo.id, {
+        title: todoTitle.value,
+        isCompleted: isTodoComplete.checked,
+        dueDate: todoDueDate.value,
+        category: categoryEdit.value,
+      })
+      searchTodos.value
+        ? addTodosToDOM(todoList.filterList(searchTodos.value))
+        : addTodosToDOM()
+
+      _closeModal(modalForTodo)
+    }
+
+    _openModal(modalForTodo)
+    _closeModalEventListener(null, 'modalForTodo', modalForTodo)
+  }
+
   const _todoElement = todo => {
     const element = _stringToHTML(
       `<li class='todo ${todo.isCompleted ? 'completed' : ''}'>
@@ -188,18 +224,17 @@ const DOM_EVENTS = (() => {
       }">${todo.title}
         <input type="checkbox" id="isComplete${todo.id}" name="isComplete" ${
         todo.isCompleted && "checked='checked'"
-      }">
+      }" disabled>
         <span class="checkmark"></span>
         </label>
         <button id='deleteButton${todo.id}'>Delete</button>
        </li>`
     )
 
-    element.querySelector(`#isComplete${todo.id}`).onclick = () => {
+    element.firstElementChild.onclick = ({ target }) => {
+      console.log(target.nodeName, target.id !== `#deleteButton${todo.id}`)
+      target.nodeName !== 'BUTTON' && _todoModal(todo)
       todoList.editTodo(todo.id, { isCompleted: !todo.isCompleted })
-      searchTodos.value
-        ? addTodosToDOM(todoList.filterList(searchTodos.value))
-        : addTodosToDOM()
     }
 
     element.querySelector(`#deleteButton${todo.id}`).onclick = () => {
@@ -210,6 +245,9 @@ const DOM_EVENTS = (() => {
   }
 
   const _createCategories = isCategoryNew => {
+    const categoryEdit = document.querySelector('#categoryEdit')
+
+    categoryEdit.innerHTML = ''
     categorySelect.innerHTML = ''
     categoryFilter.innerHTML = ''
 
@@ -231,6 +269,7 @@ const DOM_EVENTS = (() => {
         `<option value="${category}">${category}</option>`
       )
       const option2 = option.cloneNode(true)
+      const option3 = option.cloneNode(true)
 
       isCategoryNew &&
         category === categories[categories.length - 1] &&
@@ -238,6 +277,7 @@ const DOM_EVENTS = (() => {
 
       categorySelect.appendChild(option)
       categoryFilter.appendChild(option2)
+      categoryEdit.appendChild(option3)
     })
   }
 

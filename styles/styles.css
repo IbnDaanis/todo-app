@@ -101,7 +101,30 @@ main h1 {
   max-width: 95%;
 }
 
-.modal .container .add-todo-form {
+.modal .container input,
+.modal .container select {
+  background: #fafbfc;
+  border: 1px solid #ebebeb;
+  padding: 0.5rem 1rem;
+  height: 40px;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.modal .container input:focus,
+.modal .container select:focus {
+  outline: none;
+  border: 1px solid #1e70eb;
+}
+
+.modal .container label {
+  font-weight: 500;
+  margin-right: 0.5rem;
+  min-width: 89px;
+}
+
+.modal .container .todo-modal-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -112,27 +135,139 @@ main h1 {
   width: 100%;
 }
 
-.modal .container .add-todo-form input,
-.modal .container .add-todo-form select {
-  background: #fafbfc;
-  border: 1px solid #ebebeb;
-  padding: 0.5rem 1rem;
-  height: 40px;
+.modal .container .todo-modal-container div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.modal .container .todo-modal-container button {
+  display: block;
+  color: white;
+  background: #008212;
+  border: 0;
   border-radius: 5px;
-  width: 100%;
+  outline: 0;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-}
-
-.modal .container .add-todo-form input:focus,
-.modal .container .add-todo-form select:focus {
-  outline: none;
-  border: 1px solid #1e70eb;
-}
-
-.modal .container .add-todo-form label {
   font-weight: 500;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+
+@media (hover: hover) {
+  .modal .container .todo-modal-container button:hover {
+    -webkit-filter: brightness(1.1);
+            filter: brightness(1.1);
+  }
+}
+
+.modal .container .todo-modal-container .heading {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.modal .container .todo-modal-container .due-date-is-complete {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@media (max-width: 500px) {
+  .modal .container .todo-modal-container .due-date-is-complete {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+}
+
+.modal .container .todo-modal-container .due-date-is-complete input {
+  min-width: 140px;
+  max-width: 180px;
   margin-right: 0.5rem;
-  min-width: 89px;
+}
+
+.modal .container .todo-modal-container .due-date-is-complete .is-complete label {
+  margin-right: 0;
+}
+
+@media (max-width: 500px) {
+  .modal .container .todo-modal-container .due-date-is-complete .is-complete label {
+    margin-right: 0.5rem;
+  }
+}
+
+.modal .container .todo-modal-container .due-date-is-complete .is-complete .is-complete-input {
+  min-width: unset;
+  margin-right: 0;
+  width: unset;
+  height: unset;
+  cursor: pointer;
+  -webkit-appearance: none;
+  background-color: #fafafa;
+  border: 1px solid #cacece;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  padding: 9px;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+}
+
+.modal .container .todo-modal-container .due-date-is-complete .is-complete .is-complete-input:checked {
+  background-color: #e9ecee;
+  border: 1px solid #adb8c0;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+  color: #99a1a7;
+}
+
+.modal .container .todo-modal-container .due-date-is-complete .is-complete .is-complete-input:checked::after {
+  content: '\2714';
+  font-size: 14px;
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  color: #083ed3;
+}
+
+.modal .container .todo-modal-container .due-date-is-complete .is-complete .is-complete-input:active, .modal .container .todo-modal-container .due-date-is-complete .is-complete .is-complete-input:checked:active {
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.modal .container .todo-modal-container .category {
+  margin-bottom: 1rem;
+}
+
+.modal .container .todo-modal-container .category select {
+  margin-right: 0.5rem;
+}
+
+.modal .container .todo-modal-container .category button {
+  display: block;
+  width: 40px;
+  height: 40px;
+  font-weight: 700;
+}
+
+.modal .container .add-todo-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
 }
 
 .modal .container .add-todo-form .add-todo {

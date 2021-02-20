@@ -23,32 +23,147 @@
     width: 500px;
     max-width: 95%;
 
-    .add-todo-form {
+    input,
+    select {
+      background: rgb(250, 251, 252);
+      border: 1px solid rgb(235, 235, 235);
+      padding: 0.5rem 1rem;
+      height: 40px;
+      border-radius: 5px;
+      width: 100%;
+      font-size: 1rem;
+
+      &:focus {
+        outline: none;
+        border: 1px solid rgb(30, 112, 235);
+      }
+    }
+
+    label {
+      font-weight: 500;
+      margin-right: 0.5rem;
+      min-width: 89px;
+    }
+
+    .todo-modal-container {
       display: flex;
       flex-direction: column;
       width: 100%;
 
-      input,
-      select {
-        background: rgb(250, 251, 252);
-        border: 1px solid rgb(235, 235, 235);
-        padding: 0.5rem 1rem;
-        height: 40px;
-        border-radius: 5px;
-        width: 100%;
-        font-size: 1rem;
+      div {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
 
-        &:focus {
-          outline: none;
-          border: 1px solid rgb(30, 112, 235);
+      button {
+        display: block;
+        color: white;
+        background: #008212;
+        border: 0;
+        border-radius: 5px;
+        outline: 0;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        font-weight: 500;
+        transition: 0.2s ease-in-out;
+
+        @media (hover: hover) {
+          &:hover {
+            filter: brightness(1.1);
+          }
         }
       }
 
-      label {
-        font-weight: 500;
-        margin-right: 0.5rem;
-        min-width: 89px;
+      .heading {
+        font-size: 2rem;
+        margin-bottom: 1rem;
       }
+
+      .due-date-is-complete {
+        display: flex;
+        @media (max-width: 500px) {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        input {
+          min-width: 140px;
+          max-width: 180px;
+          margin-right: 0.5rem;
+        }
+        .is-complete {
+          label {
+            margin-right: 0;
+
+            @media (max-width: 500px) {
+              margin-right: 0.5rem;
+            }
+          }
+
+          .is-complete-input {
+            min-width: unset;
+            margin-right: 0;
+            width: unset;
+            height: unset;
+            cursor: pointer;
+            -webkit-appearance: none;
+            background-color: #fafafa;
+            border: 1px solid #cacece;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+              inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+            padding: 9px;
+            border-radius: 3px;
+            display: inline-block;
+            position: relative;
+
+            &:checked {
+              background-color: #e9ecee;
+              border: 1px solid #adb8c0;
+              box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+                inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05),
+                inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+              color: #99a1a7;
+
+              &::after {
+                content: '\2714';
+                font-size: 14px;
+                position: absolute;
+                top: 0px;
+                left: 3px;
+                color: #083ed3;
+              }
+            }
+
+            &:active,
+            &:checked:active {
+              box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+                inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+            }
+          }
+        }
+      }
+
+      .category {
+        margin-bottom: 1rem;
+
+        select {
+          margin-right: 0.5rem;
+        }
+
+        button {
+          display: block;
+          width: 40px;
+          height: 40px;
+          font-weight: 700;
+        }
+      }
+    }
+
+    .add-todo-form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
 
       .add-todo {
         display: flex;

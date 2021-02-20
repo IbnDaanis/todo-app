@@ -60,6 +60,61 @@
         </div>
       </div>
 
+      <div class="modal" id="modalForTodo">
+        <div class="container">
+          <form id="editTodoForm" class="todo-modal-container">
+            <h2 class="heading">Edit Todo</h2>
+            <div class="title">
+              <label for="todoTitle">Todo:</label>
+              <input
+                type="text"
+                class="todo-title"
+                id="todoTitle"
+                name="todoTitle"
+              />
+            </div>
+            <div class="due-date-is-complete">
+              <div class="due-date">
+                <label for="todoDueDate">Due date:</label>
+                <input
+                  type="date"
+                  class="todo-due-date"
+                  id="todoDueDate"
+                  name="todoDueDate"
+                />
+              </div>
+              <div class="is-complete">
+                <label for="todoDueDate">Complete?</label>
+                <input
+                  type="checkbox"
+                  class="is-complete-input"
+                  id="isTodoComplete"
+                  name="isTodoComplete"
+                  checked
+                />
+              </div>
+            </div>
+            <div class="category">
+              <label for="category">Category:</label>
+              <select
+                name="categoryEdit"
+                id="categoryEdit"
+                title="Select a Category"
+                required
+              ></select>
+              <button
+                type="button"
+                id="addTodoCategoryButtonEdit"
+                title="Add a Category"
+              >
+                +
+              </button>
+            </div>
+            <button type="submit" id="editTodoSubmitButton">Update Todo</button>
+          </form>
+        </div>
+      </div>
+
       <div class="modal" id="modalForAddingTodo">
         <div class="container">
           <form class="add-todo-form" id="addTodoForm">
@@ -102,7 +157,6 @@
                 +
               </button>
             </div>
-
             <button type="submit" id="addTodoSubmitButton">Add Todo</button>
           </form>
         </div>
