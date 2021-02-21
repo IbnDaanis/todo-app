@@ -185,21 +185,30 @@ const DOM_EVENTS = (() => {
   const _todoElement = todo => {
     const element = _stringToHTML(
       `<li class='todo ${todo.isCompleted ? 'completed' : ''}'>
-        <label for="isComplete${todo.id}" class='container' title="${
+        <label for="isComplete${todo.id}" class='container' title="Edit Todo: ${
         todo.title
       }">${todo.title}
         <input type="checkbox" id="isComplete${todo.id}" name="isComplete" ${
         todo.isCompleted && "checked='checked'"
       }" disabled>
-        <span class="checkmark"></span>
+        <span class="checkmark" id="checkmark${
+          todo.id
+        }" title="Toggle Todo Completion"></span>
         </label>
         <button id='deleteButton${todo.id}'>Delete</button>
        </li>`
     )
 
     element.firstElementChild.onclick = ({ target }) => {
-      target.nodeName !== 'BUTTON' && _todoModal(todo)
+      target.nodeName !== 'BUTTON' &&
+        !target.classList.contains('checkmark') &&
+        _todoModal(todo)
       todoList.editTodo(todo.id, { isCompleted: !todo.isCompleted })
+    }
+
+    element.querySelector(`#checkmark${todo.id}`).onclick = () => {
+      todoList.editTodo(todo.id, { isCompleted: !todo.isCompleted })
+      addTodosToDOM()
     }
 
     element.querySelector(`#deleteButton${todo.id}`).onclick = () => {
