@@ -71,10 +71,13 @@ const DOM_EVENTS = (() => {
   const categoryFilter = document.querySelector('#categoryFilter')
   const sort = document.querySelector('#sort')
   const sortMode = document.querySelector('#sortMode')
-  const addTodoCategoryForm = document.querySelector('#addTodoCategoryForm')
   const addTodoCategoryButton = document.querySelector('#addTodoCategoryButton')
+  const addTodoCategoryForm = document.querySelector('#addTodoCategoryForm')
   const modalForTodoCategories = document.querySelector(
     '#modalForTodoCategories'
+  )
+  const addTodoCategoryFilter = document.querySelector(
+    '#addTodoCategoryButtonFilter'
   )
 
   const todoList = new TodoList()
@@ -96,6 +99,8 @@ const DOM_EVENTS = (() => {
   const dateToday = new Date().toISOString().split('T')[0]
   addTodoForm['dueDate'].value = dateToday
   addTodoForm['dueDate'].setAttribute('min', dateToday)
+
+  addTodoCategoryFilter.onclick = () => _openModal(modalForTodoCategories)
 
   const _stringToHTML = (str, elementType) => {
     const fragment = elementType

@@ -18,7 +18,7 @@
     font-size: 1rem;
     font-weight: 500;
     transition: 0.2s ease-in-out;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 
     @media (hover: hover) {
       &:hover {
@@ -46,7 +46,8 @@
 
   .search-and-filter {
     display: flex;
-    margin-bottom: 1rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
 
     input {
       margin-right: 0.5rem;
@@ -54,6 +55,27 @@
 
     select {
       width: 200px;
+      margin-right: 0.5rem;
+    }
+
+    button {
+      display: block;
+      color: white;
+      background: rgb(30, 112, 235);
+      border: 0;
+      border-radius: 5px;
+      outline: 0;
+      height: 40px;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: 0.2s ease-in-out;
+
+      @media (hover: hover) {
+        &:hover {
+          filter: brightness(1.1);
+        }
+      }
     }
   }
 
