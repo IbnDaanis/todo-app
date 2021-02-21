@@ -47,6 +47,7 @@ import {
   _stringToHTML,
   _openModal,
   _closeModal,
+  _alphabetical,
 } from './utils.js'
 
 const DOM_EVENTS = (() => {
@@ -274,7 +275,7 @@ const DOM_EVENTS = (() => {
     )
   }
 
-  const options = {
+  const sortOptions = {
     sorter: null,
     direction: 'ascending',
   }
@@ -284,11 +285,11 @@ const DOM_EVENTS = (() => {
       category ? todo.category === category : true
     )
 
-    const { sorter, direction } = options
+    const { sorter, direction } = sortOptions
     if (sorter) {
       switch (sorter) {
         case 'category':
-          todosToDisplay.sort((a, b) => a[sorter].localeCompare(b[sorter]))
+          todosToDisplay.sort((a, b) => _alphabetical(a[sorter], b[sorter]))
         case 'date':
           todosToDisplay.sort(
             (a, b) => new Date(a.dueDate) - new Date(b.dueDate)
@@ -349,8 +350,8 @@ const DOM_EVENTS = (() => {
 
     const handleChange = () => {
       page = 0
-      options.sorter = sort.value
-      options.direction = sortMode.value
+      sortOptions.sorter = sort.value
+      sortOptions.direction = sortMode.value
       sort.value ? (sortMode.disabled = false) : (sortMode.disabled = true)
       addTodosToDOM()
     }

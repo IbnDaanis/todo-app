@@ -43,3 +43,7 @@ export const _closeModal = el => {
     el.style.display = 'none'
   }, 300)
 }
+
+export const _alphabetical = (a, b) => {
+  a.localeCompare(b)
+}
