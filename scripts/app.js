@@ -293,7 +293,6 @@ const DOM_EVENTS = (() => {
     const todosToDisplay = todos.filter(todo =>
       category ? todo.category === category : true
     )
-
     const { sorter, direction } = sortOptions
     if (sorter) {
       switch (sorter) {
@@ -314,6 +313,10 @@ const DOM_EVENTS = (() => {
       .slice(page * 20, page * 20 + 20)
       .forEach(todo => todoContainer.appendChild(_todoElement(todo)))
     _addPageNumbers(todosToDisplay.length)
+
+    setTimeout(() => {
+      scrollbarPages.scrollLeft = page * 27
+    }, 100)
   }
 
   const createAddTodoForm = () => {
@@ -328,11 +331,25 @@ const DOM_EVENTS = (() => {
       addTodoForm['category'].value
     )
 
+  const _resetFilterAndSearch = () => {
+    const sort = document.querySelector('#sort')
+    const sortMode = document.querySelector('#sortMode')
+    query = null
+    category = null
+    search.value = ''
+    sortOptions.sorter = null
+    sortOptions.direction = 'ascending'
+    sort.firstElementChild.selected = true
+    sortMode.disabled = true
+    sortMode.firstElementChild.selected = true
+    categoryFilter.firstElementChild.selected = true
+  }
+
   addTodoForm.onsubmit = event => {
     event.preventDefault()
     todoList.addTodo(addTodoFormSubmit())
-    query = null
     page = Math.ceil(todoList.getList().length / 20) - 1
+    _resetFilterAndSearch()
     addTodosToDOM()
     setTimeout(() => {
       scrollbar.scrollIntoView(todoContainer.lastElementChild, {
