@@ -41,22 +41,7 @@ class TodoList {
   }
 }
 
-const scrollbar = Scrollbar.init(document.querySelector('#my-scrollbar'), {
-  damping: 0.1,
-  renderByPixels: true,
-  continuousScrolling: true,
-  alwaysShowTracks: true,
-})
-
-const scrollbarPages = Scrollbar.init(
-  document.querySelector('#pagesScrollbar'),
-  {
-    damping: 0.1,
-    renderByPixels: true,
-    continuousScrolling: true,
-    alwaysShowTracks: true,
-  }
-)
+import { scrollbar, scrollbarPages } from './utils.js'
 
 const DOM_EVENTS = (() => {
   const addTodoForm = document.querySelector('#addTodoForm')
