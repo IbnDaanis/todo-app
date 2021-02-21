@@ -57,19 +57,9 @@ const DOM_EVENTS = (() => {
   const searchTodos = document.querySelector('#search')
   const modalForDeletingTodo = document.querySelector('#modalForDeletingTodo')
   const deleteTodoButton = document.querySelector('#deleteTodo')
-  const pageNumbers = document.querySelector('#pageNumbers')
   const categorySelect = document.querySelector('#category')
   const categoryFilter = document.querySelector('#categoryFilter')
-  const sort = document.querySelector('#sort')
-  const sortMode = document.querySelector('#sortMode')
-  const addTodoCategoryButton = document.querySelector('#addTodoCategoryButton')
-  const addTodoCategoryForm = document.querySelector('#addTodoCategoryForm')
-  const modalForTodoCategories = document.querySelector(
-    '#modalForTodoCategories'
-  )
-  const addTodoCategoryFilter = document.querySelector(
-    '#addTodoCategoryButtonFilter'
-  )
+  const modalTodoCategories = document.querySelector('#modalTodoCategories')
 
   const todoList = new TodoList()
 
@@ -91,7 +81,8 @@ const DOM_EVENTS = (() => {
   addTodoForm['dueDate'].value = dateToday
   addTodoForm['dueDate'].setAttribute('min', dateToday)
 
-  addTodoCategoryFilter.onclick = () => _openModal(modalForTodoCategories)
+  const addTodoCategoryFilter = document.querySelector('#addTodoCategoryFilter')
+  addTodoCategoryFilter.onclick = () => _openModal(modalTodoCategories)
 
   const _closeModalEventListener = (target1, target2, modal) => {
     document.body.addEventListener('click', ({ target }) => {
@@ -103,6 +94,7 @@ const DOM_EVENTS = (() => {
   }
 
   const _addPageNumbers = (todos = todoList.getList().length) => {
+    const pageNumbers = document.querySelector('#pageNumbers')
     pageNumbers.innerHTML = ''
     const length = todos || 1
 
@@ -158,6 +150,7 @@ const DOM_EVENTS = (() => {
     const todoDueDate = document.querySelector('#todoDueDate')
     const isTodoComplete = document.querySelector('#isTodoComplete')
     const categoryEdit = document.querySelector('#categoryEdit')
+    const addTodoCategoryEdit = document.querySelector('#addTodoCategoryEdit')
 
     todoTitle.value = todo.title
     todoDueDate.value = todo.dueDate
@@ -166,6 +159,8 @@ const DOM_EVENTS = (() => {
     isTodoComplete.onchange = () => {
       todoList.editTodo(todo.id, { isCompleted: isTodoComplete.checked })
     }
+
+    addTodoCategoryEdit.onclick = () => _openModal(modalTodoCategories)
 
     editTodoForm.onsubmit = event => {
       event.preventDefault()
@@ -202,7 +197,6 @@ const DOM_EVENTS = (() => {
     )
 
     element.firstElementChild.onclick = ({ target }) => {
-      console.log(target.nodeName, target.id !== `#deleteButton${todo.id}`)
       target.nodeName !== 'BUTTON' && _todoModal(todo)
       todoList.editTodo(todo.id, { isCompleted: !todo.isCompleted })
     }
@@ -252,7 +246,11 @@ const DOM_EVENTS = (() => {
   }
 
   const createCategoryOptions = () => {
-    addTodoCategoryButton.onclick = () => _openModal(modalForTodoCategories)
+    const addTodoCategoryForm = document.querySelector('#addTodoCategoryForm')
+    const addTodoCategoryButton = document.querySelector(
+      '#addTodoCategoryButton'
+    )
+    addTodoCategoryButton.onclick = () => _openModal(modalTodoCategories)
 
     _createCategories(false)
 
@@ -271,8 +269,8 @@ const DOM_EVENTS = (() => {
 
     _closeModalEventListener(
       'addTodoCategory',
-      'modalForTodoCategories',
-      modalForTodoCategories
+      'modalTodoCategories',
+      modalTodoCategories
     )
   }
 
@@ -346,6 +344,9 @@ const DOM_EVENTS = (() => {
   }
 
   const addTodoSorting = () => {
+    const sort = document.querySelector('#sort')
+    const sortMode = document.querySelector('#sortMode')
+
     const handleChange = () => {
       page = 0
       options.sorter = sort.value
