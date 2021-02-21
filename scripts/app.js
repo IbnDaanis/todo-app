@@ -41,7 +41,13 @@ class TodoList {
   }
 }
 
-import { scrollbar, scrollbarPages } from './utils.js'
+import {
+  scrollbar,
+  scrollbarPages,
+  _stringToHTML,
+  _openModal,
+  _closeModal,
+} from './utils.js'
 
 const DOM_EVENTS = (() => {
   const addTodoForm = document.querySelector('#addTodoForm')
@@ -86,32 +92,6 @@ const DOM_EVENTS = (() => {
   addTodoForm['dueDate'].setAttribute('min', dateToday)
 
   addTodoCategoryFilter.onclick = () => _openModal(modalForTodoCategories)
-
-  const _stringToHTML = (str, elementType) => {
-    const fragment = elementType
-      ? document.createElement(elementType)
-      : document.createDocumentFragment()
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(str, 'text/html')
-    ;[...doc.body.children].forEach(element => fragment.appendChild(element))
-    return fragment
-  }
-
-  const _openModal = el => {
-    document.body.style.overflow = 'hidden'
-    el.style.display = 'flex'
-    setTimeout(() => {
-      el.style.opacity = '1'
-    }, 0)
-  }
-
-  const _closeModal = el => {
-    document.body.style.overflow = 'unset'
-    el.style.opacity = '0'
-    setTimeout(() => {
-      el.style.display = 'none'
-    }, 300)
-  }
 
   const _closeModalEventListener = (target1, target2, modal) => {
     document.body.addEventListener('click', ({ target }) => {
