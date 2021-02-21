@@ -254,7 +254,7 @@ main h1 {
 
 .modal .container .todo-modal-container .category button {
   display: block;
-  width: 40px;
+  padding: 0.5rem 1rem;
   height: 40px;
   font-weight: 700;
 }
