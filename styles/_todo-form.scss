@@ -1,24 +1,24 @@
 .add-todo-form-container {
-  background: white;
-  border-radius: 5px;
   width: 500px;
   max-width: 95%;
   margin-bottom: 1rem;
   padding: 1rem;
+  border-radius: 5px;
+  background: white;
 
   .open-add-todo-modal {
     display: block;
-    color: white;
-    background: rgb(30, 112, 235);
+    height: 40px;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 1rem;
     border: 0;
     border-radius: 5px;
     outline: 0;
-    height: 40px;
-    padding: 0.5rem 1rem;
+    color: white;
     font-size: 1rem;
     font-weight: 500;
+    background: rgb(30, 112, 235);
     transition: 0.2s ease-in-out;
-    margin-bottom: 0.5rem;
 
     @media (hover: hover) {
       &:hover {
@@ -29,13 +29,13 @@
 
   input,
   select {
-    background: rgb(250, 251, 252);
-    border: 1px solid rgb(235, 235, 235);
     padding: 0.5rem 1rem;
     height: 40px;
-    border-radius: 5px;
     width: 100%;
+    border: 1px solid rgb(235, 235, 235);
+    border-radius: 5px;
     font-size: 1rem;
+    background: rgb(250, 251, 252);
     cursor: pointer;
 
     &:focus {
@@ -61,14 +61,14 @@
     button {
       display: block;
       color: white;
-      background: rgb(30, 112, 235);
+      height: 40px;
+      padding: 0.5rem 1rem;
       border: 0;
       border-radius: 5px;
       outline: 0;
-      height: 40px;
-      padding: 0.5rem 1rem;
       font-size: 1rem;
       font-weight: 500;
+      background: rgb(30, 112, 235);
       transition: 0.2s ease-in-out;
 
       @media (hover: hover) {
